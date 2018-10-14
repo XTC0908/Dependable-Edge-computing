@@ -3,4 +3,5 @@ ES HK project
 
 ss :wq
 CSDX
-problems now: planner ,no plan can be found
+
+problems now:  how FF works in a heuristic search, 
