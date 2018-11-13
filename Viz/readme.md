@@ -10,7 +10,7 @@ To-Do List:
 - [ ] Update Vehicle
 - [ ] Interactive
 
-__utilization__
+__usage__
 
 _viz_map.py_ :
 
