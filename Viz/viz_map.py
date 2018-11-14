@@ -3,6 +3,9 @@ import osmnx as ox
 import sys
 from util import download_map
 
+#simulated jammed edge
+jam_edge = [(1525463170, 222112985), (1525463170, 1525463175)]
+
 class RoadMap(object):
     def __init__(self, road_map=None):
         self.map = road_map
@@ -24,10 +27,17 @@ class RoadMap(object):
         G = self.map
         mapping = self.__mapping__(width, height)
 
+        print(G.edges)
+
         for u, v in G.edges(keys=False, data=False):
+            print(u, v)
+            #print(G.nodes[u]['x'], G.nodes[u]['y'])
             x_1, y_1 = mapping(G.nodes[u]['x'], G.nodes[u]['y'])
             x_2, y_2 = mapping(G.nodes[v]['x'], G.nodes[v]['y'])
-            handler.create_line(x_1, y_1, x_2, y_2, width=5, fill='#B0B0B0')
+            handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#B0B0B0')
+
+        for u, v in jam_edge:
+            handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#F81818')
 
 
     def __mapping__(self, w, h):
