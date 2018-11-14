@@ -4,9 +4,13 @@ import sys
 from util import download_map
 
 #simulated jammed edge
-jam_edge = [(1525463170, 222112985), (1525463170, 1525463175)]
+#jam_edge = [(1525463170, 222112985), (1525463170, 1525463175)]
 
 class RoadMap(object):
+
+    jam_edge = []
+    smooth_edge = []
+
     def __init__(self, road_map=None):
         self.map = road_map
         if road_map != None:
@@ -15,13 +19,20 @@ class RoadMap(object):
         else:
              self.bbox = None
         
+    def draw_jammed_edge(self, u, v):
+        # red color
+        handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#F81818')
+
+    def draw_smooth_edge(self, u, v):
+        # green color
+        handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#07B123')
     
     def load_map(self, path):
         self.map = ox.load_graphml(path)
         edges = ox.graph_to_gdfs(self.map, nodes=False, fill_edge_geometry=True)
         self.bbox = edges.total_bounds #west, south, east, north
 
-    def draw_map(self, handler):
+    def draw_map(self, handler): # handler -> canvas
         handler.delete('all')
         width, height = handler.winfo_width(), handler.winfo_height()
         G = self.map
@@ -37,7 +48,7 @@ class RoadMap(object):
             handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#B0B0B0')
 
         for u, v in jam_edge:
-            handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#F81818')
+            draw_jammed_edge(u, v)
 
 
     def __mapping__(self, w, h):
