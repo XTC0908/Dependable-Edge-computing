@@ -277,11 +277,23 @@ edge_info_BINARY_DIR:STATIC=/home/yulans/Documents/edge/cnedge/Dependable-Edge-c
 //Value Computed by CMake
 edge_info_SOURCE_DIR:STATIC=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info
 
-//Value Computed by CMake
-gathermsg_BINARY_DIR:STATIC=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/gathermsg
+//The directory containing a CMake configuration file for gencpp.
+gencpp_DIR:PATH=/opt/ros/kinetic/share/gencpp/cmake
 
-//Value Computed by CMake
-gathermsg_SOURCE_DIR:STATIC=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/gathermsg
+//The directory containing a CMake configuration file for geneus.
+geneus_DIR:PATH=/opt/ros/kinetic/share/geneus/cmake
+
+//The directory containing a CMake configuration file for genlisp.
+genlisp_DIR:PATH=/opt/ros/kinetic/share/genlisp/cmake
+
+//The directory containing a CMake configuration file for genmsg.
+genmsg_DIR:PATH=/opt/ros/kinetic/share/genmsg/cmake
+
+//The directory containing a CMake configuration file for gennodejs.
+gennodejs_DIR:PATH=/opt/ros/kinetic/share/gennodejs/cmake
+
+//The directory containing a CMake configuration file for genpy.
+genpy_DIR:PATH=/opt/ros/kinetic/share/genpy/cmake
 
 //The directory containing a CMake configuration file for geographic_msgs.
 geographic_msgs_DIR:PATH=/opt/ros/kinetic/share/geographic_msgs/cmake
@@ -332,6 +344,9 @@ gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 //Path to a library.
 lib:FILEPATH=/opt/ros/kinetic/lib/libxmlrpcpp.so
 
+//The directory containing a CMake configuration file for message_generation.
+message_generation_DIR:PATH=/opt/ros/kinetic/share/message_generation/cmake
+
 //The directory containing a CMake configuration file for message_runtime.
 message_runtime_DIR:PATH=/opt/ros/kinetic/share/message_runtime/cmake
 
@@ -372,7 +387,7 @@ xmlrpcpp_DIR:PATH=/opt/ros/kinetic/share/xmlrpcpp/cmake
 
 //catkin environment
 CATKIN_ENV:INTERNAL=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/catkin_generated/env_cached.sh
-CATKIN_TEST_RESULTS_DIR:INTERNAL=/home/yulans/Documents/edge/simple/rosws/build/test_results
+CATKIN_TEST_RESULTS_DIR:INTERNAL=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/test_results
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //This is the directory where this CMakeCache.txt was created
@@ -447,7 +462,7 @@ CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
 CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/home/yulans/Documents/edge/simple/rosws/src
+CMAKE_HOME_DIRECTORY:INTERNAL=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
@@ -467,7 +482,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

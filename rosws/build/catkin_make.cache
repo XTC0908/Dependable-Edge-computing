@@ -1,2 +1,2 @@
-bridge:edge_info:gathermsg
+bridge:edge_info
 -DCATKIN_DEVEL_PREFIX=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel -DCMAKE_INSTALL_PREFIX=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/install -G Unix Makefiles

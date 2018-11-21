@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/yulans/Documents/edge/simple/rosws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

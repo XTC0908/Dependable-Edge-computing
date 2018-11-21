@@ -31,7 +31,7 @@
 
   var cmdVel = new ROSLIB.Topic({
     ros : ros,
-    name : '/start_msg',
+    name : '/vhc_status_msg',
     messageType : 'std_msgs/String'
   });
 
@@ -39,6 +39,9 @@
     data : "Start"
   });
   cmdVel.publish(start);
+  console.log('Published command:' + start.data); 
+
+
 
   // Subscribing to a Topic
   // ----------------------
@@ -50,14 +53,18 @@
   });
  // listener.unsubscribe();
 */
+
+
+
   var geopoint = new ROSLIB.Topic({
     ros : ros,
     name : '/geopoint',
-    messageType : 'geographic_msgs/GeoPoint'
+    messageType : 'edge_info/vhc_geo'
   });
   geopoint.subscribe(function(message) {
-  console.log('Received message on ' + geopoint.name + ': ' + message.altitude);  
+  console.log('Received message on vehicle ' + message.vhcid + ': [' + message.geo.latitude + ',' + message.geo.longitude + ',' + message.geo.altitude + ']');  
   });
+
 
   // Calling a service
   // -----------------

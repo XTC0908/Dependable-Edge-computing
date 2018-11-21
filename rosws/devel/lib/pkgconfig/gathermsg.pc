@@ -1,8 +1,0 @@
-prefix=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel
-
-Name: gathermsg
-Description: Description of gathermsg
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib 
-Requires: 

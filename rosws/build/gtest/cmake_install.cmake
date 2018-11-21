@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/yulans/Documents/edge/simple/rosws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/yulans/Documents/edge/simple/rosws/build/gtest/gtest/cmake_install.cmake")
+  include("/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/gtest/gtest/cmake_install.cmake")
 
 endif()
 

@@ -3,6 +3,6 @@ prefix=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/instal
 Name: edge_info
 Description: Description of edge_info
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/install/include
 Libs: -L/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/install/lib 
-Requires: 
+Requires: message_runtime
