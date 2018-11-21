@@ -49,6 +49,7 @@
 
 import rospy
 import numpy
+import random
 from std_msgs.msg import String
 from geographic_msgs.msg import RoutePath, RouteSegment, WayPoint, GeoPoint
 from edge_info.msg import map_info
@@ -56,8 +57,7 @@ from edge_info.msg import vhc_geo
 
 vhc_status = 0
 obs_status = 0
-vhcid = 2
-
+vhcid = 0
 def vhc_status_callback(data):
     global vhc_status
     if data.data == "Start":
@@ -66,31 +66,19 @@ def vhc_status_callback(data):
 def dist(A,B):
     return numpy.sqrt((A.geo.longitude-B.geo.longitude)*(A.geo.longitude-B.geo.longitude) + (A.geo.latitude-B.geo.latitude)*(A.geo.latitude-B.geo.latitude))
 
-def obs_callback(data):
-    global obs_status, GeoP_msg, Obs_pub
-    if data.vhcid != GeoP_msg.vhcid and dist(GeoP_msg,data) < 0.0001:
-        obs_status = 1
-        Obs_msg = vhc_geo()
-        Obs_msg.vhcid = vhcid
-        Obs_msg.geo.latitude = data.geo.latitude
-        Obs_msg.geo.longitude = data.geo.longitude
-        Obs_msg.geo.altitude = data.geo.altitude
-        Obs_pub.publish(Obs_msg)
+   
 
-def fake_geo_02(i):
+def fake_geo_01(i):
     fake_start = [59.3365935,18.0674845,0.0]
     fake_end = [59.3367506,18.0707389,0.0]
     num = 1000
     vhc_p = vhc_geo()
     vhc_p.vhcid = vhcid
-    i = i-200
-    if i<0:
-        vhc_p.geo.latitude = fake_start[0]
-        vhc_p.geo.longitude = fake_start[1]
-        vhc_p.geo.altitude = fake_start[2]
-    elif i<num:
-        vhc_p.geo.latitude = (fake_end[0]-fake_start[0])/num*i+fake_start[0]
-        vhc_p.geo.longitude =  (fake_end[1]-fake_start[1])/num*i+fake_start[1]
+    fake_lat = random.uniform(fake_start[0],fake_end[0])
+    fake_lon = random.uniform(fake_start[1],fake_end[1])
+    if i<num:
+        vhc_p.geo.latitude = fake_lat
+        vhc_p.geo.longitude = fake_lon
         vhc_p.geo.altitude = 0.0
     else:
         vhc_p.geo.latitude = fake_end[0]
@@ -101,18 +89,16 @@ def fake_geo_02(i):
 
 
 def edge_talker():
-    global start, GeoP_msg, Obs_pub
+    global start, map_status, GeoP_msg, obs_staus
     GeoP_pub = rospy.Publisher('geopoint', vhc_geo, queue_size=10)
-    Obs_pub = rospy.Publisher('obspoint', vhc_geo, queue_size=10)
     rospy.Subscriber("vhc_status_msg", String, vhc_status_callback)
-    rospy.Subscriber("geopoint", vhc_geo, obs_callback)
     rospy.init_node('edge_talker', anonymous=True)
-    rate = rospy.Rate(10) # 10hz
+    rate = rospy.Rate(1) # 10hz
     i=0
     while not rospy.is_shutdown():
         if vhc_status == 1:
             GeoP_msg = vhc_geo()
-            GeoP_msg = fake_geo_02(i)
+            GeoP_msg = fake_geo_01(i)
             i = i + 1
             GeoP_pub.publish(GeoP_msg)
             print("Vehicle" + str(GeoP_msg.vhcid) + ": [" + str(GeoP_msg.geo.latitude) + "," + str(GeoP_msg.geo.longitude) + "," + str(GeoP_msg.geo.altitude) + "]")
