@@ -1,0 +1,2 @@
+@prefix sandbox:    <http://local/sandbox>
+@prefix entity:     <http://local/entity>
