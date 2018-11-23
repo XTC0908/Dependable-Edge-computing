@@ -62,6 +62,8 @@ def vhc_status_callback(data):
     global vhc_status
     if data.data == "Start":
     	vhc_status = 1
+    if data.data == "Stop":
+        vhc_status = 0
 
 def dist(A,B):
     return numpy.sqrt((A.geo.longitude-B.geo.longitude)*(A.geo.longitude-B.geo.longitude) + (A.geo.latitude-B.geo.latitude)*(A.geo.latitude-B.geo.latitude))

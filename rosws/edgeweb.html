@@ -38,10 +38,55 @@
   var start = new ROSLIB.Message({
     data : "Start"
   });
-  cmdVel.publish(start);
-  console.log('Published command:' + start.data); 
+
+  var stop = new ROSLIB.Message({
+    data : "Stop"
+  });
+
+  function cmdFunction(cmd){
+  cmdVel.publish(cmd);
+  console.log('Published command:' + cmd.data); 
+}
 
 
+
+ var path = new ROSLIB.Topic({
+    ros : ros,
+    name : '/vhc_path_msg',
+    messageType : 'edge_info/vhc_geo'
+  });
+
+/*
+  var lat = getElementById("lat");
+  var lon = getElementById("lon");
+  var alt = getElementById("alt");
+
+  var end = new ROSLIB.Message({
+    vhcid : 1,
+    geo:{
+        latitude:lat,
+        longitude : lon,
+        altitude : alt
+    }
+  });
+  */
+  function setEnd(){
+    var lat = document.getElementById("lat").value;
+    var lon = document.getElementById("lon").value;
+    var alt = document.getElementById("alt").value;
+    console.log(lat);
+    var end = new ROSLIB.Message({
+      vhcid : 1,
+      geo:{
+        latitude:parseFloat(lat),
+        longitude : parseFloat(lon),
+        altitude : parseFloat(alt)
+    }
+  });
+    path.publish(end)
+  }
+
+ 
 
   // Subscribing to a Topic
   // ----------------------
@@ -116,7 +161,10 @@
 </head>
 
 <body>
-  <h1>Simple roslib Example</h1>
-  <p>Check your Web Console for output.</p>
+  <h1>Edge Control</h1>
+  <p><button onclick="cmdFunction(start)">Start</button> 
+  <button onclick="cmdFunction(stop)">Stop</button> </p>
+  <p>Default:59.3367506,18.0707389,0.0</p>
+  <p> Vehicle 1:<input type ="double" id= "lat"><input type ="double" id= "lon"><input type ="double" id= "alt"><button onclick="setEnd()">Send</button> </p>
 </body>
 </html>
