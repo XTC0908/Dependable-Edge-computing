@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+
+<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+<script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+
+<script type="text/javascript" type="text/javascript">
+  // Connecting to ROS
+  // -----------------
+
+  var ros = new ROSLIB.Ros({
+    url : 'ws://localhost:9090'
+  });
+
+  ros.on('connection', function() {
+    console.log('Connected to websocket server.');
+  });
+
+  ros.on('error', function(error) {
+    console.log('Error connecting to websocket server: ', error);
+  });
+
+  ros.on('close', function() {
+    console.log('Connection to websocket server closed.');
+  });
+
+  // Publishing a Topic
+  // ------------------
+
+  var cmdVel = new ROSLIB.Topic({
+    ros : ros,
+    name : '/vhc_status_m',
+    messageType : 'edge_info/vhc_cmd'
+  });
+
+
+  function cmdFunction(cmdstring){
+    var id = parseInt(document.getElementById("cmdid").value);
+    var command = new ROSLIB.Message({
+      vhcid : id,
+      cmd : cmdstring
+    });
+  cmdVel.publish(command);
+  console.log('Published command: ' + command.cmd + " to vehicle " + command.vhcid); 
+}
+
+
+
+ var path = new ROSLIB.Topic({
+    ros : ros,
+    name : '/vhc_path_msg',
+    messageType : 'edge_info/vhc_geo'
+  });
+
+/*
+  var lat = getElementById("lat");
+  var lon = getElementById("lon");
+  var alt = getElementById("alt");
+
+  var end = new ROSLIB.Message({
+    vhcid : 1,
+    geo:{
+        latitude:lat,
+        longitude : lon,
+        altitude : alt
+    }
+  });
+  */
+  function setEnd(){
+    var id = parseInt(document.getElementById("id").value);
+    var lat = document.getElementById("lat").value;
+    var lon = document.getElementById("lon").value;
+    var alt = document.getElementById("alt").value;
+    console.log(lat);
+    var end = new ROSLIB.Message({
+      vhcid : id,
+      geo:{
+        latitude:parseFloat(lat),
+        longitude : parseFloat(lon),
+        altitude : parseFloat(alt)
+    }
+  });
+    path.publish(end)
+  }
+
+ 
+
+  // Subscribing to a Topic
+  // ----------------------
+
+/*  var listener = new ROSLIB.Topic({
+    ros : ros,
+    name : '/chatter',
+    messageType : 'std_msgs/String'
+  });
+ // listener.unsubscribe();
+*/
+
+
+
+  var geopoint = new ROSLIB.Topic({
+    ros : ros,
+    name : '/geopoint',
+    messageType : 'edge_info/vhc_geo'
+  });
+  geopoint.subscribe(function(message) {
+  //console.log('Received message on vehicle ' + message.vhcid + ': [' + message.geo.latitude + ',' + message.geo.longitude + ',' + message.geo.altitude + ']');  
+  });
+
+  var obs = new ROSLIB.Topic({
+    ros : ros,
+    name : '/obspoint',
+    messageType : 'edge_info/vhc_geo'
+  });
+  obs.subscribe(function(message) {
+  console.log('Vehicle '+ message.vhcid + ' finds obstacle '  + ': [' + message.geo.latitude + ',' + message.geo.longitude + ',' + message.geo.altitude + ']');  
+  });
+
+  // Calling a service
+  // -----------------
+/*
+  var addTwoIntsClient = new ROSLIB.Service({
+    ros : ros,
+    name : '/add_two_ints',
+    serviceType : 'rospy_tutorials/AddTwoInts'
+  });
+
+  var request = new ROSLIB.ServiceRequest({
+    a : 1,
+    b : 2
+  });
+
+  addTwoIntsClient.callService(request, function(result) {
+    console.log('Result for service call on '
+      + addTwoIntsClient.name
+      + ': '
+      + result.sum);
+  });
+
+  // Getting and setting a param value
+  // ---------------------------------
+
+  ros.getParams(function(params) {
+    console.log(params);
+  });
+
+  var maxVelX = new ROSLIB.Param({
+    ros : ros,
+    name : 'max_vel_y'
+  });
+
+  maxVelX.set(0.8);
+  maxVelX.get(function(value) {
+    console.log('MAX VAL: ' + value);
+  });
+*/
+</script>
+</head>
+
+<body>
+  <h1>Edge Control</h1>
+  <p>
+    <input type ="int" id= "cmdid" size="1" value="1">
+  <button onclick="cmdFunction(1)">Start</button> 
+  <button onclick="cmdFunction(0)">Stop</button> </p>
+  <p>Default:59.3367506,18.0707389,0.0</p>
+  <form>
+  <p> Vehicle <input type ="int" id= "id" size="1" value="1">:  
+    <input type ="double" id= "lat" value="59.3367506">
+    <input type ="double" id= "lon" value="18.0707389">
+    <input type ="double" id= "alt" value="0.0">
+    <button onclick="setEnd()">Send</button> </p>
+  </form>
+</body>
+</html>
