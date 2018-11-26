@@ -1,0 +1,78 @@
+@prefix : <http://ontology.cf.ericsson.net/pddl_example/> .
+@prefix ns1: <http://open-services.net/ns/> .
+@prefix oslc: <http://open-services.net/ns/core> .
+@prefix oslc1: <http://open-services.net/ns/core#> .
+@prefix pddl: <http://ontology.cf.ericsson.net/pddl/> .
+@prefix pddle: <http://ontology.cf.ericsson.net/pddl_example/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl> .
+@prefix sh1: <http://www.w3.org/ns/shacl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:edge-computing-problem a pddl:Problem ;
+    rdfs:label "edge-computing-problem" ;
+    pddl:domain :edge-computing ;
+    pddl:goal [ a pddl:And ;
+            pddl:argument [ a :on ;
+                    :on-x :a ;
+                    :on-y :dest ] ] ;
+    pddl:init [ a :visible ;
+            :visible-x :f ;
+            :visible-y :e ],
+        [ a pddl:EQ ;
+            pddl:left [ a :moved ;
+                    :moved-m :a ] ;
+            pddl:right 0 ],
+        [ a pddl:EQ ;
+            pddl:left [ a :total-moved ] ;
+            pddl:right 0 ],
+        [ a :on ;
+            :on-x :a ;
+            :on-y :b ],
+        [ a :visible ;
+            :visible-x :b ;
+            :visible-y :c ],
+        [ a :visible ;
+            :visible-x :c ;
+            :visible-y :d ],
+        [ a :visible ;
+            :visible-x :d ;
+            :visible-y :e ],
+        [ a :visible ;
+            :visible-x :e ;
+            :visible-y :dest ] ;
+    pddl:minimize [ a pddl:total-time ] ;
+    pddl:object :a,
+        :b,
+        :c,
+        :d,
+        :dest,
+        :e ;
+    oslc1:instanceShape pddl:ProblemShape .
+
+:f a :waypoint ;
+    rdfs:label "f" ;
+    ns1:coreinstanceShape pddl:ObjectShape .
+
+:b a :waypoint ;
+    rdfs:label "b" ;
+    oslc1:instanceShape pddl:ObjectShape .
+
+:c a :waypoint ;
+    rdfs:label "c" ;
+    oslc1:instanceShape pddl:ObjectShape .
+
+:d a :waypoint ;
+    rdfs:label "d" ;
+    oslc1:instanceShape pddl:ObjectShape .
+
+:a a :vehicle ;
+    rdfs:label "a" ;
+    oslc1:instanceShape pddl:ObjectShape .
+
+:e a :waypoint ;
+    rdfs:label "e" ;
+    oslc1:instanceShape pddl:ObjectShape .
+
