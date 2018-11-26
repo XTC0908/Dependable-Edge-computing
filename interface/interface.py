@@ -22,14 +22,17 @@ class InterfacePlanner(object):
     def generate_plan(self, url, ttl):
         with open(ttl, 'r') as f:
             data = f.read()
-            r = requests.post((url + self.generate_pddl_url), data=data, headers = self.generate_pddl_header)
+            r = requests.post((url + self.generate_plan_url), data=data, headers = self.generate_pddl_header)
             return r
 
-    def generate_validated_plan(self,url):
-        pass
+    def generate_validated_plan(self, url, ttl):
+        with open(ttl, 'r') as f:
+            data = f.read()
+            r = requests.post((url + self.generate_validated_url), data=data, headers = self.generate_plan_header)
+            return r
 
 
 if __name__=='__main__':
     planner = InterfacePlanner()
-    r = planner.generate_pddl('http://localhost:3021', './domain.ttl')
+    r = planner.generate_validated_plan('http://localhost:3021', './domain_feasible.ttl')
     print(r.text)
