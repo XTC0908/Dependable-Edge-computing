@@ -1,32 +1,32 @@
-##Environment
-###add path to bashrc
+Environment
+add path to bashrc
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/Dependable-Edge-computing/rosws
 
-###install rosbridge
+install rosbridge
 http://wiki.ros.org/rosbridge_suite/Tutorials/RunningRosbridge
-
-
-##edge_info
 
 Treminal 1
 roscore
 
 Terminal 2
 source devel/setup.sh
-rosrun edge_info edge_talker.py
+rosrun edge_info vhc1.py
 
-#listener not completed
-#Terminal 3
-#source devel/setup.sh
-#rosrun gathermsg listener.py
+Terminal 3
+source devel/setup.sh
+rosrun edge_info vhc2.py
 
 Terminal 4
+source devel/setup.sh
+rosrun edge_info vhc2.py
+
+Terminal 5
+source devel/setup.sh
+rosrun edge_info ghost_vhc.py
+
+Terminal 6
 roslaunch bridge rosbridge_websocket.launch
 
 open edgeweb.html in brouser
 To watch concole, press F12
 
-
-
-Terminator Ctrl-Shift E split vertically
-	   Ctrl-Shift O split horizontally
