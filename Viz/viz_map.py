@@ -1,7 +1,9 @@
 import tkinter as tk
 import osmnx as ox
 import sys
+import math
 from util import download_map
+import requests
 
 #simulated jammed edge
 #jam_edge = [(1525463170, 222112985), (1525463170, 1525463175)]
@@ -10,6 +12,10 @@ class RoadMap(object):
 
     jam_edge = []
     smooth_edge = []
+    cars = []
+
+    rectangle_points = [(400, 400), (800, 400), (800, 600), (400, 600)]
+    rotate_rectangle = []
 
 
     def __init__(self, road_map=None):
@@ -20,6 +26,27 @@ class RoadMap(object):
         else:
             self.bbox = None
         
+    def rotate(self, angle, center):
+        angle = math.radians(angle)
+        cos_val = math.cos(angle)
+        sin_val = math.sin(angle)
+        cx, cy = center
+        new_points = []
+        for x_old, y_old in self.rectangle_points:
+            x_old -= cx
+            y_old -= cy
+            x_new = x_old * cos_val - y_old * sin_val
+            y_new = x_old * sin_val + y_old * cos_val
+            new_points.append([x_new + cx, y_new + cy])
+        self.rotate_rectangle = new_points
+
+    def draw_square(self, handler):
+        p = self.rotate_rectangle
+        handler.create_line(p[0][0], p[0][1], p[1][0], p[1][1], width=3, fill='yellow', dash = 5)
+        handler.create_line(p[2][0], p[2][1], p[1][0], p[1][1], width=3, fill='yellow', dash = 5)
+        handler.create_line(p[0][0], p[0][1], p[3][0], p[3][1], width=3, fill='yellow', dash = 5)
+        handler.create_line(p[2][0], p[2][1], p[3][0], p[3][1], width=3, fill='yellow', dash = 5)
+
     def draw_jammed_edge(self, u, v, handler):
         # red color
         mapping = self.__mapping__(self.width, self.height)
@@ -48,16 +75,16 @@ class RoadMap(object):
 
         print(G.edges(keys=False, data=False))
         
-
         for u, v in G.edges(keys=False, data=False):
             #print(u, v)
             print(G.nodes[u])
             x_1, y_1 = mapping(G.nodes[u]['x'], G.nodes[u]['y'])
             x_2, y_2 = mapping(G.nodes[v]['x'], G.nodes[v]['y'])
             handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#B0B0B0')
-
+            
         for u, v in self.jam_edge:
             self.draw_jammed_edge(u, v)
+
 
     def input_jammed_node(self, jammed_node_x, jammed_node_y, handler):
         # input: a node which is a part of a jammed edge
@@ -101,8 +128,17 @@ class RoadMap(object):
         for u, v in self.smooth_edge:
             self.draw_smooth_edge(u, v, handler)
 
+    def input_cars(self, car, handler):
+        # input is a list [(x,y),(x,y)]
+        self.cars += car 
 
+        # draw cars
+        G = self.map
+        mapping = self.__mapping__(self.width, self.height)
 
+        for x, y in self.cars:
+            x_1, y_1 = mapping(x, y)
+            handler.create_oval(x_1 - 10, y_1 - 10, x_1 + 10, y_1 + 10, fill='#0C69BF')
 
 
     def __mapping__(self, w, h):
@@ -130,9 +166,16 @@ if __name__ == "__main__":
 
     root.geometry('1500x1500')
     canvas = init_canvas(root, 1500, 1500)
-    
+
     road_map.draw_map(canvas)
 
     road_map.input_jammed_node(333307.4094043318, 6581667.751225858, canvas)
     road_map.input_smooth_node(333349.74592687737, 6581566.582857542, canvas)
+    road_map.input_cars([(333307.4094043318, 6581667.751225858),(333349.74592687737, 6581566.582857542)], canvas)
+
+
+    print(road_map.rectangle_points)
+    road_map.rotate(30, (500, 500)  )
+    road_map.draw_square(canvas)
+
     root.mainloop()

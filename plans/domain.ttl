@@ -1,0 +1,180 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix oslc: <http://open-services.net/ns/core#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix pddl: <http://ontology.cf.ericsson.net/pddl/> .
+@prefix : <http://ontology.cf.ericsson.net/pddl_example/> .
+
+
+:edge_computing
+ a pddl:Domain;
+ oslc:instanceShape pddl:DomainShape ;
+rdfs:label "edge-computing";
+pddl:type :vehicle ,
+          :waypoint ;
+pddl:constant :dest ;
+pddl:predicate :vehicle_at ,
+               :visible ;
+pddl:function :moved ,
+			  :total-moved ;
+pddl:action :move .
+
+:waypoint 
+ a rdfs:Class ;
+ rdfs:subClassOf pddl:PrimitiveType ;
+ oslc:instanceShape pddl:PrimitiveTypeShape ;
+ rdfs:label "waypoint" .
+
+:vehicle
+ a rdfs:Class ;
+ rdfs:subClassOf pddl:PrimitiveType ;
+ oslc:instanceShape pddl:PrimitiveTypeShape ;
+ rdfs:label "vehicle" .
+
+:vehicle_at
+ a rdfs:Class ;
+ rdfs:subClassOf pddl:Predicate ;
+ oslc:instanceShape pddl:PredicateShape ;
+ rdfs:label "vehicle_at" ;
+ pddl:parameter :vehicle_at-v ,
+				:vehicle_at-x .
+
+:vehicle_at-v
+ a pddl:Parameter ;
+ oslc:instanceShape pddl:ParameterShape ;
+ rdfs:label "v" ;
+ pddl:type :vehicle ;
+ sh:order 1 .
+
+:vehicle_at-x
+ a pddl:Parameter ;
+  oslc:instanceShape pddl:ParameterShape ;
+ rdfs:label "x" ;
+ pddl:type :waypoint ;
+ sh:order 2 .
+
+:visible
+ a rdfs:Class ;
+rdfs:subClassOf pddl:Predicate ;
+oslc:instanceShape pddl:PredicateShape ;
+rdfs:label "visible" ;
+pddl:parameter :visible-x ,
+				:visible-y .
+
+:visible-x
+ a pddl:Parameter ;
+  oslc:instanceShape pddl:ParameterShape ;
+rdfs:label "x" ;
+pddl:type :waypoint ;
+sh:order 1 .
+
+:visible-y
+ a pddl:Parameter ;
+  oslc:instanceShape pddl:ParameterShape ;
+rdfs:label "y" ;
+pddl:type :waypoint ;
+sh:order 2 .
+
+:moved
+a rdfs:Class ;
+rdfs:subClassOf pddl:Function ;
+oslc:instanceShape pddl:FunctionShape ;
+rdfs:label "moved" ;
+pddl:parameter :moved-m .
+
+:moved-m
+a pddl:Parameter ;
+oslc:instanceShape pddl:ParameterShape ;
+rdfs:label "m" ;
+pddl:type :vehicle ;
+sh:order 1 .
+
+:total-moved
+a rdfs:Class ;
+rdfs:subClassOf pddl:Function ;
+oslc:instanceShape pddl:FunctionShape ;
+rdfs:label "total-moved" .
+
+:move
+ a rdfs:Class ;
+ rdfs:subClassOf pddl:Action ;
+ oslc:instanceShape pddl:ActionShape ;
+ rdfs:label "move" ;
+ pddl:parameter :move-v ,
+                :move-x ,
+                :move-y ;
+ pddl:precondition [ a pddl:And ;
+                     pddl:argument [ a :vehicle_at ;
+                                      :vehicle_at-v :move-v ;
+                                      :vehicle_at-x :move-x 
+                        
+                                    ] ,
+                                    [a :visible ;
+                                      :visible-x :move-x;
+                                      :visible-y :move-y
+                                    ]
+                    ];
+
+ pddl:effect [ a pddl:And ;
+    			      pddl:argument [ a :vehicle_at ;
+                        				:vehicle_at-v :move-v ;
+                    		      	:vehicle_at-x :move-y ;
+                              ] ,
+    		                      [ a pddl:Not ;
+    					                  pddl:argument [ a :vehicle_at ;
+                    						                :vehicle_at-v :move-v ;
+                        					              :vehicle_at-x :move-x
+                                              ]
+                              ] ,
+                              [ a pddl:Increase ;
+                              	pddl:parameter [ a :moved ;
+                              					          :moved-m :move-v
+                              					        ] ;
+                              					        pddl:argument 1
+                              ] ,
+                              [ a pddl:Increase ;
+                              	pddl:parameter [a :total-moved ] ;
+                              	pddl:argument 1
+                              ] ,
+                              [ a pddl:When ;
+                                		 pddl:argument [
+                                                  a pddl:Equality ;
+                                                      pddl:left :move-y ;
+                                                       pddl:right :dest
+                                              ] ;
+    
+                                pddl:argument [ a pddl:Not ;
+                                    			pddl:argument [ a :visible ;
+                                            		:visible-x :move-x;
+                                        			:visible-y :move-y
+                                             ]
+                                                  ]
+                                          ]
+              ].
+
+:move-v 
+  a pddl:Parameter ;
+  oslc:instanceShape pddl:ParameterShape ;
+  rdfs:label "v" ;
+  pddl:type :vehicle ;
+  sh:order 1 .
+
+:move-x
+  a pddl:Parameter ;
+  oslc:instanceShape pddl:ParameterShape ;
+  rdfs:label "x" ;
+  pddl:type :waypoint ;
+  sh:order 2 .
+
+:move-y
+  a pddl:Parameter ;
+  oslc:instanceShape pddl:ParameterShape ;
+  rdfs:label "y" ;
+  pddl:type :waypoint ;
+  sh:order 3 .
+
+:dest
+  a :waypoint ;
+  oslc:instanceShape pddl:ConstantShape ;
+  rdfs:label "dest" .
