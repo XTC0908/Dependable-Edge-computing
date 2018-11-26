@@ -55,6 +55,7 @@ include edge_info/CMakeFiles/edge_info_generate_messages_lisp.dir/progress.make
 
 edge_info/CMakeFiles/edge_info_generate_messages_lisp: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/map_info.lisp
 edge_info/CMakeFiles/edge_info_generate_messages_lisp: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/vhc_geo.lisp
+edge_info/CMakeFiles/edge_info_generate_messages_lisp: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/vhc_cmd.lisp
 
 
 /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/map_info.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
@@ -75,9 +76,16 @@ edge_info/CMakeFiles/edge_info_generate_messages_lisp: /home/yulans/Documents/ed
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from edge_info/vhc_geo.msg"
 	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg -Iedge_info:/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg -Igeographic_msgs:/opt/ros/kinetic/share/geographic_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Iuuid_msgs:/opt/ros/kinetic/share/uuid_msgs/cmake/../msg -p edge_info -o /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg
 
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/vhc_cmd.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/vhc_cmd.lisp: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/vhc_cmd.lisp: /opt/ros/kinetic/share/std_msgs/msg/String.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from edge_info/vhc_cmd.msg"
+	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg -Iedge_info:/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg -Igeographic_msgs:/opt/ros/kinetic/share/geographic_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Iuuid_msgs:/opt/ros/kinetic/share/uuid_msgs/cmake/../msg -p edge_info -o /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg
+
 edge_info_generate_messages_lisp: edge_info/CMakeFiles/edge_info_generate_messages_lisp
 edge_info_generate_messages_lisp: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/map_info.lisp
 edge_info_generate_messages_lisp: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/vhc_geo.lisp
+edge_info_generate_messages_lisp: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/common-lisp/ros/edge_info/msg/vhc_cmd.lisp
 edge_info_generate_messages_lisp: edge_info/CMakeFiles/edge_info_generate_messages_lisp.dir/build.make
 
 .PHONY : edge_info_generate_messages_lisp

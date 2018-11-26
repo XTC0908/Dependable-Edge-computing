@@ -36,6 +36,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/edge_info/msg" TYPE FILE FILES
     "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/map_info.msg"
     "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg"
+    "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
     )
 endif()
 

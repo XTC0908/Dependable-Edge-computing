@@ -100,6 +100,17 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -121,17 +132,6 @@ install/local: preinstall
 install/local/fast: install/local
 
 .PHONY : install/local/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -526,6 +526,21 @@ geographic_msgs_generate_messages_lisp/fast:
 .PHONY : geographic_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
+edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
+	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build && $(MAKE) -f CMakeFiles/Makefile2 edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+.PHONY : edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_cpp: edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_cpp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_cpp/fast:
+	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build && $(MAKE) -f edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+.PHONY : geometry_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
 edge_info/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
 	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build && $(MAKE) -f CMakeFiles/Makefile2 edge_info/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 .PHONY : edge_info/CMakeFiles/std_msgs_generate_messages_py.dir/rule
@@ -676,6 +691,21 @@ _edge_info_generate_messages_check_deps_map_info/fast:
 .PHONY : _edge_info_generate_messages_check_deps_map_info/fast
 
 # Convenience name for target.
+edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/rule:
+	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build && $(MAKE) -f CMakeFiles/Makefile2 edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/rule
+.PHONY : edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/rule
+
+# Convenience name for target.
+_edge_info_generate_messages_check_deps_vhc_cmd: edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/rule
+
+.PHONY : _edge_info_generate_messages_check_deps_vhc_cmd
+
+# fast build rule for target.
+_edge_info_generate_messages_check_deps_vhc_cmd/fast:
+	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build && $(MAKE) -f edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/build.make edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/build
+.PHONY : _edge_info_generate_messages_check_deps_vhc_cmd/fast
+
+# Convenience name for target.
 edge_info/CMakeFiles/edge_info_generate_messages_eus.dir/rule:
 	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build && $(MAKE) -f CMakeFiles/Makefile2 edge_info/CMakeFiles/edge_info_generate_messages_eus.dir/rule
 .PHONY : edge_info/CMakeFiles/edge_info_generate_messages_eus.dir/rule
@@ -795,21 +825,6 @@ edge_info_generate_messages_py/fast:
 	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build && $(MAKE) -f edge_info/CMakeFiles/edge_info_generate_messages_py.dir/build.make edge_info/CMakeFiles/edge_info_generate_messages_py.dir/build
 .PHONY : edge_info_generate_messages_py/fast
 
-# Convenience name for target.
-edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
-	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build && $(MAKE) -f CMakeFiles/Makefile2 edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-.PHONY : edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-geometry_msgs_generate_messages_cpp: edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : geometry_msgs_generate_messages_cpp
-
-# fast build rule for target.
-geometry_msgs_generate_messages_cpp/fast:
-	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build && $(MAKE) -f edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
-.PHONY : geometry_msgs_generate_messages_cpp/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -844,6 +859,8 @@ help:
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... edge_info_generate_messages_cpp"
 	@echo "... geographic_msgs_generate_messages_lisp"
+	@echo "... test"
+	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
@@ -854,6 +871,7 @@ help:
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... edge_info_generate_messages"
 	@echo "... _edge_info_generate_messages_check_deps_map_info"
+	@echo "... _edge_info_generate_messages_check_deps_vhc_cmd"
 	@echo "... edge_info_generate_messages_eus"
 	@echo "... edge_info_geneus"
 	@echo "... edge_info_generate_messages_lisp"
@@ -864,8 +882,6 @@ help:
 	@echo "... edge_info_generate_messages_py"
 	@echo "... install/strip"
 	@echo "... install/local"
-	@echo "... geometry_msgs_generate_messages_cpp"
-	@echo "... test"
 .PHONY : help
 
 

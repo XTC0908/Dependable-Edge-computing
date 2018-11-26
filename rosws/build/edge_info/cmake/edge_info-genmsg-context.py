@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/map_info.msg;/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg"
+messages_str = "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/map_info.msg;/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg;/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
 services_str = ""
 pkg_name = "edge_info"
 dependencies_str = "geographic_msgs;std_msgs"

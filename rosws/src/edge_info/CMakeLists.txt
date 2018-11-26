@@ -54,6 +54,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    map_info.msg
    vhc_geo.msg
+   vhc_cmd.msg
  )
 
 ## Generate services in the 'srv' folder

@@ -55,6 +55,7 @@ include edge_info/CMakeFiles/edge_info_generate_messages_nodejs.dir/progress.mak
 
 edge_info/CMakeFiles/edge_info_generate_messages_nodejs: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/map_info.js
 edge_info/CMakeFiles/edge_info_generate_messages_nodejs: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/vhc_geo.js
+edge_info/CMakeFiles/edge_info_generate_messages_nodejs: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/vhc_cmd.js
 
 
 /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/map_info.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
@@ -75,9 +76,16 @@ edge_info/CMakeFiles/edge_info_generate_messages_nodejs: /home/yulans/Documents/
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from edge_info/vhc_geo.msg"
 	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg -Iedge_info:/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg -Igeographic_msgs:/opt/ros/kinetic/share/geographic_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Iuuid_msgs:/opt/ros/kinetic/share/uuid_msgs/cmake/../msg -p edge_info -o /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg
 
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/vhc_cmd.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/vhc_cmd.js: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/vhc_cmd.js: /opt/ros/kinetic/share/std_msgs/msg/String.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from edge_info/vhc_cmd.msg"
+	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg -Iedge_info:/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg -Igeographic_msgs:/opt/ros/kinetic/share/geographic_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Iuuid_msgs:/opt/ros/kinetic/share/uuid_msgs/cmake/../msg -p edge_info -o /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg
+
 edge_info_generate_messages_nodejs: edge_info/CMakeFiles/edge_info_generate_messages_nodejs
 edge_info_generate_messages_nodejs: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/map_info.js
 edge_info_generate_messages_nodejs: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/vhc_geo.js
+edge_info_generate_messages_nodejs: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/share/gennodejs/ros/edge_info/msg/vhc_cmd.js
 edge_info_generate_messages_nodejs: edge_info/CMakeFiles/edge_info_generate_messages_nodejs.dir/build.make
 
 .PHONY : edge_info_generate_messages_nodejs

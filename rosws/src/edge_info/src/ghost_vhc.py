@@ -53,14 +53,14 @@ import random
 from std_msgs.msg import String
 from geographic_msgs.msg import RoutePath, RouteSegment, WayPoint, GeoPoint
 from edge_info.msg import map_info
-from edge_info.msg import vhc_geo
+from edge_info.msg import vhc_geo,vhc_cmd
 
 vhc_status = 0
 obs_status = 0
 vhcid = 0
 def vhc_status_callback(data):
     global vhc_status
-    if data.data == "Start":
+    if data.cmd == 1:
     	vhc_status = 1
 
 def dist(A,B):
@@ -76,22 +76,17 @@ def fake_geo_01(i):
     vhc_p.vhcid = vhcid
     fake_lat = random.uniform(fake_start[0],fake_end[0])
     fake_lon = random.uniform(fake_start[1],fake_end[1])
-    if i<num:
-        vhc_p.geo.latitude = fake_lat
-        vhc_p.geo.longitude = fake_lon
-        vhc_p.geo.altitude = 0.0
-    else:
-        vhc_p.geo.latitude = fake_end[0]
-        vhc_p.geo.longitude = fake_end[1]
-        vhc_p.geo.altitude = fake_end[2]
+    vhc_p.geo.latitude = fake_lat
+    vhc_p.geo.longitude = fake_lon
+    vhc_p.geo.altitude = 0.0
     return vhc_p
 
 
 
 def edge_talker():
-    global start, map_status, GeoP_msg, obs_staus
+    global start, map_status, GeoP_msg, obs_staus,vhc_status
     GeoP_pub = rospy.Publisher('geopoint', vhc_geo, queue_size=10)
-    rospy.Subscriber("vhc_status_msg", String, vhc_status_callback)
+    rospy.Subscriber("vhc_status_m", vhc_cmd, vhc_status_callback)
     rospy.init_node('edge_talker', anonymous=True)
     rate = rospy.Rate(1) # 10hz
     i=0

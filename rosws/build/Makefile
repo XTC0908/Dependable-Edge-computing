@@ -608,6 +608,19 @@ geographic_msgs_generate_messages_lisp/fast:
 .PHONY : geographic_msgs_generate_messages_lisp/fast
 
 #=============================================================================
+# Target rules for targets named geometry_msgs_generate_messages_cpp
+
+# Build rule for target.
+geometry_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_cpp
+.PHONY : geometry_msgs_generate_messages_cpp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+.PHONY : geometry_msgs_generate_messages_cpp/fast
+
+#=============================================================================
 # Target rules for targets named std_msgs_generate_messages_py
 
 # Build rule for target.
@@ -738,6 +751,19 @@ _edge_info_generate_messages_check_deps_map_info/fast:
 .PHONY : _edge_info_generate_messages_check_deps_map_info/fast
 
 #=============================================================================
+# Target rules for targets named _edge_info_generate_messages_check_deps_vhc_cmd
+
+# Build rule for target.
+_edge_info_generate_messages_check_deps_vhc_cmd: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _edge_info_generate_messages_check_deps_vhc_cmd
+.PHONY : _edge_info_generate_messages_check_deps_vhc_cmd
+
+# fast build rule for target.
+_edge_info_generate_messages_check_deps_vhc_cmd/fast:
+	$(MAKE) -f edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/build.make edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/build
+.PHONY : _edge_info_generate_messages_check_deps_vhc_cmd/fast
+
+#=============================================================================
 # Target rules for targets named edge_info_generate_messages_eus
 
 # Build rule for target.
@@ -841,19 +867,6 @@ edge_info_generate_messages_py/fast:
 	$(MAKE) -f edge_info/CMakeFiles/edge_info_generate_messages_py.dir/build.make edge_info/CMakeFiles/edge_info_generate_messages_py.dir/build
 .PHONY : edge_info_generate_messages_py/fast
 
-#=============================================================================
-# Target rules for targets named geometry_msgs_generate_messages_cpp
-
-# Build rule for target.
-geometry_msgs_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_cpp
-.PHONY : geometry_msgs_generate_messages_cpp
-
-# fast build rule for target.
-geometry_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make edge_info/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
-.PHONY : geometry_msgs_generate_messages_cpp/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -901,6 +914,7 @@ help:
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... edge_info_generate_messages_cpp"
 	@echo "... geographic_msgs_generate_messages_lisp"
+	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
@@ -911,6 +925,7 @@ help:
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... edge_info_generate_messages"
 	@echo "... _edge_info_generate_messages_check_deps_map_info"
+	@echo "... _edge_info_generate_messages_check_deps_vhc_cmd"
 	@echo "... edge_info_generate_messages_eus"
 	@echo "... edge_info_geneus"
 	@echo "... edge_info_generate_messages_lisp"
@@ -919,7 +934,6 @@ help:
 	@echo "... edge_info_gennodejs"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... edge_info_generate_messages_py"
-	@echo "... geometry_msgs_generate_messages_cpp"
 .PHONY : help
 
 

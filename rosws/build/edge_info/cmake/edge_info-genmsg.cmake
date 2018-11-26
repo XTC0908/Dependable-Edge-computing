@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "edge_info: 2 messages, 0 services")
+message(STATUS "edge_info: 3 messages, 0 services")
 
 set(MSG_I_FLAGS "-Iedge_info:/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg;-Igeographic_msgs:/opt/ros/kinetic/share/geographic_msgs/cmake/../msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg;-Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg;-Iuuid_msgs:/opt/ros/kinetic/share/uuid_msgs/cmake/../msg")
 
@@ -27,6 +27,11 @@ add_custom_target(_edge_info_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "edge_info" "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg" "geographic_msgs/GeoPoint"
 )
 
+get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" NAME_WE)
+add_custom_target(_edge_info_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "edge_info" "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" "std_msgs/String"
+)
+
 #
 #  langs = gencpp;geneus;genlisp;gennodejs;genpy
 #
@@ -43,6 +48,12 @@ _generate_msg_cpp(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/edge_info
+)
+_generate_msg_cpp(edge_info
+  "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/edge_info
 )
 
@@ -63,6 +74,8 @@ add_dependencies(edge_info_generate_messages edge_info_generate_messages_cpp)
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/map_info.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_cpp _edge_info_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg" NAME_WE)
+add_dependencies(edge_info_generate_messages_cpp _edge_info_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_cpp _edge_info_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -86,6 +99,12 @@ _generate_msg_eus(edge_info
   "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/edge_info
 )
+_generate_msg_eus(edge_info
+  "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/edge_info
+)
 
 ### Generating Services
 
@@ -104,6 +123,8 @@ add_dependencies(edge_info_generate_messages edge_info_generate_messages_eus)
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/map_info.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_eus _edge_info_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg" NAME_WE)
+add_dependencies(edge_info_generate_messages_eus _edge_info_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_eus _edge_info_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -127,6 +148,12 @@ _generate_msg_lisp(edge_info
   "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/edge_info
 )
+_generate_msg_lisp(edge_info
+  "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/edge_info
+)
 
 ### Generating Services
 
@@ -145,6 +172,8 @@ add_dependencies(edge_info_generate_messages edge_info_generate_messages_lisp)
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/map_info.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_lisp _edge_info_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg" NAME_WE)
+add_dependencies(edge_info_generate_messages_lisp _edge_info_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_lisp _edge_info_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -168,6 +197,12 @@ _generate_msg_nodejs(edge_info
   "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/edge_info
 )
+_generate_msg_nodejs(edge_info
+  "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/edge_info
+)
 
 ### Generating Services
 
@@ -186,6 +221,8 @@ add_dependencies(edge_info_generate_messages edge_info_generate_messages_nodejs)
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/map_info.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_nodejs _edge_info_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg" NAME_WE)
+add_dependencies(edge_info_generate_messages_nodejs _edge_info_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_nodejs _edge_info_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -209,6 +246,12 @@ _generate_msg_py(edge_info
   "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/edge_info
 )
+_generate_msg_py(edge_info
+  "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
+  "${MSG_I_FLAGS}"
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/edge_info
+)
 
 ### Generating Services
 
@@ -227,6 +270,8 @@ add_dependencies(edge_info_generate_messages edge_info_generate_messages_py)
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/map_info.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_py _edge_info_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg" NAME_WE)
+add_dependencies(edge_info_generate_messages_py _edge_info_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" NAME_WE)
 add_dependencies(edge_info_generate_messages_py _edge_info_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

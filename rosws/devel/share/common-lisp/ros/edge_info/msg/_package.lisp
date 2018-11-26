@@ -3,7 +3,11 @@
   (:export
    "<MAP_INFO>"
    "MAP_INFO"
+   "<VHC_CMD>"
+   "VHC_CMD"
    "<VHC_GEO>"
    "VHC_GEO"
+   "<VHC_PATH>"
+   "VHC_PATH"
   ))
 

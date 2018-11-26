@@ -55,6 +55,7 @@ include edge_info/CMakeFiles/edge_info_generate_messages_py.dir/progress.make
 
 edge_info/CMakeFiles/edge_info_generate_messages_py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_map_info.py
 edge_info/CMakeFiles/edge_info_generate_messages_py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_vhc_geo.py
+edge_info/CMakeFiles/edge_info_generate_messages_py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_vhc_cmd.py
 edge_info/CMakeFiles/edge_info_generate_messages_py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/__init__.py
 
 
@@ -76,15 +77,23 @@ edge_info/CMakeFiles/edge_info_generate_messages_py: /home/yulans/Documents/edge
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG edge_info/vhc_geo"
 	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg -Iedge_info:/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg -Igeographic_msgs:/opt/ros/kinetic/share/geographic_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Iuuid_msgs:/opt/ros/kinetic/share/uuid_msgs/cmake/../msg -p edge_info -o /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg
 
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_vhc_cmd.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_vhc_cmd.py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_vhc_cmd.py: /opt/ros/kinetic/share/std_msgs/msg/String.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG edge_info/vhc_cmd"
+	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg -Iedge_info:/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg -Igeographic_msgs:/opt/ros/kinetic/share/geographic_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Iuuid_msgs:/opt/ros/kinetic/share/uuid_msgs/cmake/../msg -p edge_info -o /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg
+
 /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/__init__.py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_map_info.py
 /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/__init__.py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_vhc_geo.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python msg __init__.py for edge_info"
+/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/__init__.py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_vhc_cmd.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python msg __init__.py for edge_info"
 	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg --initpy
 
 edge_info_generate_messages_py: edge_info/CMakeFiles/edge_info_generate_messages_py
 edge_info_generate_messages_py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_map_info.py
 edge_info_generate_messages_py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_vhc_geo.py
+edge_info_generate_messages_py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/_vhc_cmd.py
 edge_info_generate_messages_py: /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib/python2.7/dist-packages/edge_info/msg/__init__.py
 edge_info_generate_messages_py: edge_info/CMakeFiles/edge_info_generate_messages_py.dir/build.make
 
