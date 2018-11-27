@@ -1,0 +1,27 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix oslc: <http://open-services.net/ns/core#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix pddl: <http://ontology.cf.ericsson.net/pddl/> .
+@prefix : <http://ontology.cf.ericsson.net/pddl_example/> .
+
+:edge-computing-problem
+  a pddl:Problem ;
+  oslc:instanceShape pddl:ProblemShape ;
+  rdfs:label "edge-computing-problem" ;
+  pddl:domain :edge-computing ;
+  pddl:init [ a pddl:EQ ;
+              pddl:left [ a :moved ;
+                          :moved-m :v
+                        ] ;
+              pddl:right 0
+            ] ,
+            
+            [ a pddl:EQ ;
+              pddl:left [ a :total-moved ] ;
+              pddl:right 0
+            ] ;
+
+  pddl:minimize [ a pddl:total-time ].
+
