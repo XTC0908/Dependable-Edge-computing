@@ -1,72 +1,14 @@
-import tkinter as tk
-import osmnx as ox
-import sys
-import math
-from util import download_map
-import socket
-import ast
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import json
-import queue
-from multiprocessing import Process
-from threading import Thread
-import sys
-import os
-
-request = 'can you hear me?'
-car_request = '{"category": "car", "id": 1, "x": 333307.4094043318, "y": 6581667.751225858}'
-safety_zone_request = '{"category": "safetyzone", "id": 1, "x": 333307.4094043318, "y": 6581667.751225858, \
-"dot1": (333320, 6581560), "dot2": (333307, 6581560), "dot3": (333307, 6581670), \
-"dot4": (333320, 6581670), "color": "#162C22"}'
-road_request = '{"category": "road", "ux": 333307.4094043318, "uy":6581667.751225858,\
-"vx": 333294.50284388475, "vy": 6581655.340821373, "state": "jam"}' # "jam" or "smooth"
-
-
-def ConstructHandler(message_queue, root):
-    class PostHandler(BaseHTTPRequestHandler):
-        def __init__(self, *args, **kwargs):
-            self.queue = message_queue
-            self.root = root
-            super(PostHandler, self).__init__(*args, **kwargs)
-
-        def _set_response(self):
-            self.send_response(200)
-            self.send_header('Content-type', 'text/json')
-            self.end_headers()
-
-        def do_POST(self):
-            length = int(self.headers['Content-Length'])
-            self._set_response()
-            raw_str = self.rfile.read(length)
-            json_body = json.loads(raw_str)
-            try:
-                self.queue.put(json_body)
-            except queue.Full:
-                pass
-            self.root.event_generate("<<new_post>>", when='tail')
-    
-    return PostHandler
-
-def start_server(post_handler, address=('127.0.0.1', 8888)):
-    print(os.getppid())
-    httpd = HTTPServer(address, post_handler)
-    #try:
-    httpd.serve_forever()
-    #except KeyboardInterrupt:
-    #    pass
-    #
-    #httpd.server_close()
-
-
 class RoadMap(object):
 
+    jam_edge = []
+    smooth_edge = []
+    cars = [{"id": 1, "x": 333307.4094043318, "y": 6581667.751225858},\
+        {"id": 2, "x": 333307, "y": 6581560}]
+    safetyzone = []
+
+
+
     def __init__(self, road_map=None):
-        self.jam_edge = []
-        self.smooth_edge = []
-        self.cars = []
-        #self.cars = [{"id": 1, "x": 333307.4094043318, "y": 6581667.751225858},\
-        #    {"id": 2, "x": 333307, "y": 6581560}]
-        self.safetyzone = []
         self.map = road_map
         if road_map != None:
             edges = ox.graph_to_gdfs(self.map, nodes=False, fill_edge_geometry=True)
@@ -177,7 +119,7 @@ class RoadMap(object):
 
     def input_cars(self, car_dic_element):
         # car_dic_element is a dic type element
-        if car_dic_element['category'] != 'car':
+        if car_dic_element['category'] is not 'car':
             return 
         ID, x, y = car_dic_element['id'], car_dic_element['x'], car_dic_element['y']
         newcar = {'id': ID, 'x': x, 'y': y}
@@ -235,80 +177,3 @@ class RoadMap(object):
         scale_y = h/(self.bbox[1] - self.bbox[3])
 
         return lambda x, y: (int((x-offset_x)*scale_x), int((y-offset_y)*scale_y))
-
-
-def init_canvas(master, width, height):
-    canvas = tk.Canvas(master, width=width, height=height, bg='white')
-    canvas.pack()
-    master.update_idletasks()
-    return canvas
-
-#def receive_data(road_map, s, handler):
-#
-#    # accept and establish connection
-#    conn, addr = s.accept()
-#    # receive message
-#    request    = conn.recv(1024).decode('utf-8')
-# 
-#    print('request is: ',request)
-#    print('Connected by', addr)
-#    # send message
-#    reply = 'Yes : '
-#    conn.sendall(reply.encode('utf-8'))
-#    
-#    #recv_dic = json.loads(request)
-#    recv_dic = ast.literal_eval(request)
-#    if recv_dic['category'] == 'safetyzone':
-#        print(recv_dic['id'])
-#
-#    #testing
-#    G = road_map.map
-#    mapping = road_map.__mapping__(road_map.width, road_map.height)
-#    
-#    for x, y in road_map.cars:
-#        x_1, y_1 = mapping(x, y)
-#        handler.create_oval(x_1 - 10, y_1 - 10, x_1 + 10, y_1 + 10, fill='#FFFFBF')
-#    #end of testing
-#    root.after(3500, receive_data, road_map, s, handler)
-
-def close_window(event, server):
-    server.join(timeout=0.1)
-    sys.exit()
-
-def update_window(event, message, road_map, handler):
-    try:
-        message_body = message.get(timeout=1)
-        if message_body["category"] == 'car':
-            road_map.input_cars(message_body)
-            road_map.draw_cars(handler)
-        else:
-            print('unknown message')
-    except queue.Empty:
-        print('queue is empty')
-
-if __name__ == "__main__":
-    print(os.getppid())
-
-    message = queue.Queue()
-    root = tk.Tk()
-
-    post_handler = ConstructHandler(message, root)
-    server =  Thread(target=start_server, args=(post_handler, ))
-    server.setDaemon(True)
-    server.start()
-    
-
-    road_map = RoadMap()
-    road_map.load_map('demo.graphml')
-
-    root.geometry('1500x1500')
-    canvas = init_canvas(root, 1500, 1500)
-
-    road_map.draw_map(canvas)
-
-    close = lambda x:close_window(x, server)
-    update = lambda x: update_window(x, message, road_map, canvas)
-
-    root.bind('<Escape>', close)
-    root.bind("<<new_post>>", update)
-    root.mainloop()
