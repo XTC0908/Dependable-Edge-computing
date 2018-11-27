@@ -154,7 +154,7 @@ def problem_generator(full_map, start_points, end_points, template):
 
 if __name__ == '__main__':
     full_map = nx.load_graphml('./demo.graphml')
-    problem = problem_generator(full_map, (169822, 1755176087), (1018920378, 159948),'problem _template.ttl')
+    problem = problem_generator(full_map, (169822, 1755176087), (1393926005, 172605),'problem _template.ttl')
 
     domain = Graph()
     domain.parse('domain.ttl', format='turtle')
