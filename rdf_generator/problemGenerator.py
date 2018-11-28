@@ -77,11 +77,11 @@ def problem_generator(full_map, start_points, end_points, template):
         problem.add((foo, pddle['visible-x'], pddle['way_point_'+str(u)]))
         problem.add((foo, pddle['visible-y'], pddle['way_point_'+str(v)]))
 
-        foo = BNode()
-        problem.add((pddle['edge-computing-problem'], pddl.init, foo))
-        problem.add((foo, RDF.type, pddle.visible))
-        problem.add((foo, pddle['visible-x'], pddle['way_point_'+str(v)]))
-        problem.add((foo, pddle['visible-y'], pddle['way_point_'+str(u)]))
+        #foo = BNode()
+        #problem.add((pddle['edge-computing-problem'], pddl.init, foo))
+        #problem.add((foo, RDF.type, pddle.visible))
+        #problem.add((foo, pddle['visible-x'], pddle['way_point_'+str(v)]))
+        #problem.add((foo, pddle['visible-y'], pddle['way_point_'+str(u)]))
 
         problem.add((pddle['way_point_'+str(u)], RDF.type, pddle.waypoint))
         problem.add((pddle['way_point_'+str(u)], oslc.instanceShape, pddl.ObjectShape))
