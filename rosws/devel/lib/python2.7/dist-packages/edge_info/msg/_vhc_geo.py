@@ -6,13 +6,33 @@ import genpy
 import struct
 
 import geographic_msgs.msg
+import std_msgs.msg
 
 class vhc_geo(genpy.Message):
-  _md5sum = "cfafd41cb4021d78978805fcb28453a7"
+  _md5sum = "46215f2797945e983668770007bc875d"
   _type = "edge_info/vhc_geo"
-  _has_header = False #flag to mark the presence of a Header object
-  _full_text = """uint32 vhcid
+  _has_header = True #flag to mark the presence of a Header object
+  _full_text = """Header header
+uint32 vhcid
 geographic_msgs/GeoPoint geo
+
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
 
 ================================================================================
 MSG: geographic_msgs/GeoPoint
@@ -30,8 +50,8 @@ float64 longitude
 # Altitude [m]. Positive is above the WGS 84 ellipsoid (NaN if unspecified).
 float64 altitude
 """
-  __slots__ = ['vhcid','geo']
-  _slot_types = ['uint32','geographic_msgs/GeoPoint']
+  __slots__ = ['header','vhcid','geo']
+  _slot_types = ['std_msgs/Header','uint32','geographic_msgs/GeoPoint']
 
   def __init__(self, *args, **kwds):
     """
@@ -41,7 +61,7 @@ float64 altitude
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       vhcid,geo
+       header,vhcid,geo
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -50,11 +70,14 @@ float64 altitude
     if args or kwds:
       super(vhc_geo, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
       if self.vhcid is None:
         self.vhcid = 0
       if self.geo is None:
         self.geo = geographic_msgs.msg.GeoPoint()
     else:
+      self.header = std_msgs.msg.Header()
       self.vhcid = 0
       self.geo = geographic_msgs.msg.GeoPoint()
 
@@ -71,6 +94,14 @@ float64 altitude
     """
     try:
       _x = self
+      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
+      _x = self.header.frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self
       buff.write(_get_struct_I3d().pack(_x.vhcid, _x.geo.latitude, _x.geo.longitude, _x.geo.altitude))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -81,9 +112,24 @@ float64 altitude
     :param str: byte array of serialized message, ``str``
     """
     try:
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
       if self.geo is None:
         self.geo = geographic_msgs.msg.GeoPoint()
       end = 0
+      _x = self
+      start = end
+      end += 12
+      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.header.frame_id = str[start:end].decode('utf-8')
+      else:
+        self.header.frame_id = str[start:end]
       _x = self
       start = end
       end += 28
@@ -101,6 +147,14 @@ float64 altitude
     """
     try:
       _x = self
+      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
+      _x = self.header.frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self
       buff.write(_get_struct_I3d().pack(_x.vhcid, _x.geo.latitude, _x.geo.longitude, _x.geo.altitude))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -112,9 +166,24 @@ float64 altitude
     :param numpy: numpy python module
     """
     try:
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
       if self.geo is None:
         self.geo = geographic_msgs.msg.GeoPoint()
       end = 0
+      _x = self
+      start = end
+      end += 12
+      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.header.frame_id = str[start:end].decode('utf-8')
+      else:
+        self.header.frame_id = str[start:end]
       _x = self
       start = end
       end += 28
@@ -127,6 +196,12 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
+_struct_3I = None
+def _get_struct_3I():
+    global _struct_3I
+    if _struct_3I is None:
+        _struct_3I = struct.Struct("<3I")
+    return _struct_3I
 _struct_I3d = None
 def _get_struct_I3d():
     global _struct_I3d

@@ -135,12 +135,12 @@ class vehicle:
             if self.vhc_status == 1:
                 self.GeoP_msg = self.fake_geo_01(self.end)
                 i = i + 1
-                GeoP_pub.publish(self.GeoP_msg)
-                #print("Vehicle" + str(self.GeoP_msg.vhcid) + ": [" + str(self.GeoP_msg.geo.latitude) + "," + str(self.GeoP_msg.geo.longitude) + "," + str(self.GeoP_msg.geo.altitude) + "]")
             elif self.vhc_status == 0:
                 self.GeoP_msg = self.GeoP_msg
-                GeoP_pub.publish(self.GeoP_msg)
-                #print("Vehicle" + str(self.GeoP_msg.vhcid) + ": [" + str(self.GeoP_msg.geo.latitude) + "," + str(self.GeoP_msg.geo.longitude) + "," + str(self.GeoP_msg.geo.altitude) + "]")
+            self.GeoP_msg.header.stamp = rospy.Time.now()    
+            GeoP_pub.publish(self.GeoP_msg)
+            print("Vehicle" + str(self.GeoP_msg.vhcid) + ": [" + str(self.GeoP_msg.geo.latitude) + "," + str(self.GeoP_msg.geo.longitude) + "," + str(self.GeoP_msg.geo.altitude) + "]")
+            print(self.GeoP_msg.header.stamp.secs)
             rate.sleep()
             #rospy.loginfo("Data published: [" + str(self.GeoP_msg.geo.latitude) + "," + str(self.GeoP_msg.geo.longitude) + "," + str(self.GeoP_msg.geo.altitude) + "]")
             

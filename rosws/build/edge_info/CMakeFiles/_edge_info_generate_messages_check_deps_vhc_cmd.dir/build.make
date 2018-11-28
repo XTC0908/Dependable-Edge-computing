@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/
 include edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/progress.make
 
 edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd:
-	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py edge_info /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg std_msgs/String
+	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py edge_info /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg 
 
 _edge_info_generate_messages_check_deps_vhc_cmd: edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd
 _edge_info_generate_messages_check_deps_vhc_cmd: edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_cmd.dir/build.make

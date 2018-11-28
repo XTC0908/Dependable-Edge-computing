@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/
 include edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_geo.dir/progress.make
 
 edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_geo:
-	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py edge_info /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg geographic_msgs/GeoPoint
+	cd /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/build/edge_info && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py edge_info /home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg geographic_msgs/GeoPoint:std_msgs/Header
 
 _edge_info_generate_messages_check_deps_vhc_geo: edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_geo
 _edge_info_generate_messages_check_deps_vhc_geo: edge_info/CMakeFiles/_edge_info_generate_messages_check_deps_vhc_geo.dir/build.make
