@@ -106,16 +106,27 @@
   pddl:precondition [ a pddl:And ;
                      
                          pddl:argument 
-                                  
-                                    [ a :visible ;
-                                      :visible-x :move-x ;
-                                      :visible-y :move-y 
-                                    ] ,
+                                
                                     [ a :on ;
                                       :on-x :move-b ;
                                       :on-y :move-x
-                                    ] 
-                              
+                                    ] , 
+                                    [
+                                       a pddl:Or ;
+                                       pddl:argument 
+                                       [            
+                                          a :visible ;
+                                          :visible-x :move-x ;
+                                          :visible-y :move-y
+                                          ] ,
+                                          [
+                                            a :visible ;
+                                            :visible-x :move-y ;
+                                            :visible-y :move-x 
+                                          ]
+                                        ]
+                                    
+                                                        
                     ] ;
   pddl:effect [ a pddl:And ;
                 pddl:argument [ a :on ;
