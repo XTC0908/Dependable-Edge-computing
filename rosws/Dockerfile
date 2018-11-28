@@ -10,9 +10,9 @@ RUN export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:./Dependable-Edge-computing/rosws
 # setup entrypoint
 #COPY ./rosbridge_entrypoint.sh /
 
-#EXPOSE 9090
+EXPOSE 9090
 
 #ENTRYPOINT ["/rosbridge_entrypoint.sh"]
 
-ENTRYPOINT ["./start.sh"]
+#ENTRYPOINT ["source ./Dependable-Edge-computing/rosws/start.sh"]
 CMD ["/bin/bash"]
