@@ -24,12 +24,12 @@ add_custom_target(_edge_info_generate_messages_check_deps_${_filename}
 
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg" NAME_WE)
 add_custom_target(_edge_info_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "edge_info" "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg" "geographic_msgs/GeoPoint"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "edge_info" "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg" "geographic_msgs/GeoPoint:std_msgs/Header"
 )
 
 get_filename_component(_filename "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" NAME_WE)
 add_custom_target(_edge_info_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "edge_info" "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" "std_msgs/String"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "edge_info" "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg" ""
 )
 
 #
@@ -47,13 +47,13 @@ _generate_msg_cpp(edge_info
 _generate_msg_cpp(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
+  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/edge_info
 )
 _generate_msg_cpp(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/edge_info
 )
 
@@ -96,13 +96,13 @@ _generate_msg_eus(edge_info
 _generate_msg_eus(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
+  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/edge_info
 )
 _generate_msg_eus(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/edge_info
 )
 
@@ -145,13 +145,13 @@ _generate_msg_lisp(edge_info
 _generate_msg_lisp(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
+  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/edge_info
 )
 _generate_msg_lisp(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/edge_info
 )
 
@@ -194,13 +194,13 @@ _generate_msg_nodejs(edge_info
 _generate_msg_nodejs(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
+  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/edge_info
 )
 _generate_msg_nodejs(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/edge_info
 )
 
@@ -243,13 +243,13 @@ _generate_msg_py(edge_info
 _generate_msg_py(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_geo.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg"
+  "/opt/ros/kinetic/share/geographic_msgs/cmake/../msg/GeoPoint.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/edge_info
 )
 _generate_msg_py(edge_info
   "/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/src/edge_info/msg/vhc_cmd.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/String.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/edge_info
 )
 

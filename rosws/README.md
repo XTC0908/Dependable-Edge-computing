@@ -29,19 +29,14 @@ source devel/setup.sh
 
 rosrun edge_info vhc2.py
 
+
 #### Terminal 4
-
-source devel/setup.sh
-
-rosrun edge_info vhc2.py
-
-#### Terminal 5
 
 source devel/setup.sh
 
 rosrun edge_info ghost_vhc.py
 
-#### Terminal 6
+#### Terminal 5
 
 roslaunch bridge rosbridge_websocket.launch
 

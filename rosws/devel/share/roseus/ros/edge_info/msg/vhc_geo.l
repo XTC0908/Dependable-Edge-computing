@@ -12,22 +12,33 @@
 ;;//! \htmlinclude vhc_geo.msg.html
 (if (not (find-package "GEOGRAPHIC_MSGS"))
   (ros::roseus-add-msgs "geographic_msgs"))
+(if (not (find-package "STD_MSGS"))
+  (ros::roseus-add-msgs "std_msgs"))
 
 
 (defclass edge_info::vhc_geo
   :super ros::object
-  :slots (_vhcid _geo ))
+  :slots (_header _vhcid _geo ))
 
 (defmethod edge_info::vhc_geo
   (:init
    (&key
+    ((:header __header) (instance std_msgs::Header :init))
     ((:vhcid __vhcid) 0)
     ((:geo __geo) (instance geographic_msgs::GeoPoint :init))
     )
    (send-super :init)
+   (setq _header __header)
    (setq _vhcid (round __vhcid))
    (setq _geo __geo)
    self)
+  (:header
+   (&rest __header)
+   (if (keywordp (car __header))
+       (send* _header __header)
+     (progn
+       (if __header (setq _header (car __header)))
+       _header)))
   (:vhcid
    (&optional __vhcid)
    (if __vhcid (setq _vhcid __vhcid)) _vhcid)
@@ -41,6 +52,8 @@
   (:serialization-length
    ()
    (+
+    ;; std_msgs/Header _header
+    (send _header :serialization-length)
     ;; uint32 _vhcid
     4
     ;; geographic_msgs/GeoPoint _geo
@@ -50,6 +63,8 @@
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
+     ;; std_msgs/Header _header
+       (send _header :serialize s)
      ;; uint32 _vhcid
        (write-long _vhcid s)
      ;; geographic_msgs/GeoPoint _geo
@@ -58,6 +73,8 @@
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
+   ;; std_msgs/Header _header
+     (send _header :deserialize buf ptr-) (incf ptr- (send _header :serialization-length))
    ;; uint32 _vhcid
      (setq _vhcid (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;; geographic_msgs/GeoPoint _geo
@@ -66,11 +83,30 @@
    self)
   )
 
-(setf (get edge_info::vhc_geo :md5sum-) "cfafd41cb4021d78978805fcb28453a7")
+(setf (get edge_info::vhc_geo :md5sum-) "46215f2797945e983668770007bc875d")
 (setf (get edge_info::vhc_geo :datatype-) "edge_info/vhc_geo")
 (setf (get edge_info::vhc_geo :definition-)
-      "uint32 vhcid
+      "Header header
+uint32 vhcid
 geographic_msgs/GeoPoint geo
+
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
 
 ================================================================================
 MSG: geographic_msgs/GeoPoint
@@ -92,6 +128,6 @@ float64 altitude
 
 
 
-(provide :edge_info/vhc_geo "cfafd41cb4021d78978805fcb28453a7")
+(provide :edge_info/vhc_geo "46215f2797945e983668770007bc875d")
 
 
