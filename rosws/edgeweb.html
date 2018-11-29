@@ -106,7 +106,7 @@
     messageType : 'edge_info/vhc_geo'
   });
   geopoint.subscribe(function(message) {
-  //console.log('Received message on vehicle ' + message.vhcid + ': [' + message.geo.latitude + ',' + message.geo.longitude + ',' + message.geo.altitude + ']');  
+  console.log('Received message on vehicle ' + message.vhcid + ': [' + message.geo.latitude + ',' + message.geo.longitude + ',' + message.geo.altitude + ']');  
   });
 
   var obs = new ROSLIB.Topic({
