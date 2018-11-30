@@ -1,10 +1,7 @@
 #!/bin/sh
 
-cd ./Dependable-Edge-computing/rosws
-
-roscore &
+cd /Dependable-Edge-computing/rosws
 source devel/setup.sh
-rosrun edge_info vhc1.py&
-rosrun edge_info vhc2.py&
-rosrun edge_info ghost_vhc.py&
-roslaunch bridge rosbridge_websocket.launch&
+roscore > /tmp/core_log.txt 2>&1 &
+rosrun edge_info vhc1.py > /tmp/vhc1_log.txt 2>&1 &
+roslaunch bridge rosbridge_websocket.launch > /tmp/bridge_log.txt 2>&1 &

@@ -59,6 +59,11 @@ def start_server(post_handler, address=('127.0.0.1', 8888)):
 
 
 class RoadMap(object):
+    
+    cars = []
+    jam_edge = []
+    smooth_edge = []
+    safetyzone = []
 
     def __init__(self, road_map=None):
         self.jam_edge = []
@@ -95,24 +100,28 @@ class RoadMap(object):
             color = '#E91822'
         else:
             color = '#29A71A'
-        handler.create_line(p[0][0], p[0][1], p[1][0], p[1][1], width=3, fill=color, dash = 5)
-        handler.create_line(p[2][0], p[2][1], p[1][0], p[1][1], width=3, fill=color, dash = 5)
-        handler.create_line(p[0][0], p[0][1], p[3][0], p[3][1], width=3, fill=color, dash = 5)
-        handler.create_line(p[2][0], p[2][1], p[3][0], p[3][1], width=3, fill=color, dash = 5)
+        handler.create_line(p[0][0], p[0][1], p[1][0], p[1][1], width=5, fill=color, dash = 5)
+        handler.create_line(p[2][0], p[2][1], p[1][0], p[1][1], width=5, fill=color, dash = 5)
+        handler.create_line(p[0][0], p[0][1], p[3][0], p[3][1], width=5, fill=color, dash = 5)
+        handler.create_line(p[2][0], p[2][1], p[3][0], p[3][1], width=5, fill=color, dash = 5)
 
-    def draw_jammed_edge(self, u, v, handler):
+    def draw_jammed_edge(self, handler):
         # red color
+        G = self.map
         mapping = self.__mapping__(self.width, self.height)
-        x_1, y_1 = mapping(G.nodes[u]['x'], G.nodes[u]['y'])
-        x_2, y_2 = mapping(G.nodes[v]['x'], G.nodes[v]['y'])
-        handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#F81818')
+        for u, v in self.jam_edge:
+            x_1, y_1 = mapping(G.nodes[u]['x'], G.nodes[u]['y'])
+            x_2, y_2 = mapping(G.nodes[v]['x'], G.nodes[v]['y'])
+            handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#F81818')
 
-    def draw_smooth_edge(self, u, v, handler):
+    def draw_smooth_edge(self, handler):
         # green color
+        G = self.map
         mapping = self.__mapping__(self.width, self.height)
-        x_1, y_1 = mapping(G.nodes[u]['x'], G.nodes[u]['y'])
-        x_2, y_2 = mapping(G.nodes[v]['x'], G.nodes[v]['y'])
-        handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#07B123')
+        for u, v in self.smooth_edge:
+            x_1, y_1 = mapping(G.nodes[u]['x'], G.nodes[u]['y'])
+            x_2, y_2 = mapping(G.nodes[v]['x'], G.nodes[v]['y'])
+            handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#07B123')
     
     def load_map(self, path):
         self.map = ox.load_graphml(path)
@@ -127,23 +136,22 @@ class RoadMap(object):
         mapping = self.__mapping__(width, height)
 
         #print(G.edges(keys=False, data=False))
+        #print(G.nodes)
         
         for u, v in G.edges(keys=False, data=False):
-            #print(G.nodes[u])
+            #print(G.nodes[u]['x'], G.nodes[u]['y'], G.nodes[v]['x'], G.nodes[v]['y'], '\n')
             x_1, y_1 = mapping(G.nodes[u]['x'], G.nodes[u]['y'])
             x_2, y_2 = mapping(G.nodes[v]['x'], G.nodes[v]['y'])
             handler.create_line(x_1, y_1, x_2, y_2, width=10, fill='#B0B0B0')
             
-        for u, v in self.jam_edge:
-            self.draw_jammed_edge(u, v, handler)
 
 
-    def input_jammed_node(self, ux, uy, vx, vy, handler):
+    def input_jammed_node(self, ux, uy, vx, vy):
         # input: a node which is a part of a jammed edge
         # jammed_node: longitude and latitude, similar to G.nodes[u]['x'], G.nodes[u]['y'] in draw_map function
         # the jammed edge is added into self.smooth_edge (coordinates of canvas)
         G = self.map
-
+        u_red, v_red = 0, 0
         for u, v in G.edges(keys=False, data=False):
             if G.nodes[u]['x'] == ux and G.nodes[u]['y'] == uy and G.nodes[v]['x'] == vx and G.nodes[v]['y'] == vy:
                 u_red, v_red = u, v 
@@ -153,15 +161,13 @@ class RoadMap(object):
             if u == u_red and v == v_red:
                 self.smooth_edge.remove((u, v))
 
-        for u, v in self.jam_edge:
-            self.draw_jammed_edge(u, v, handler)
-
-    def input_smooth_node(self, smooth_node_x, smooth_node_y, handler):
+        
+    def input_smooth_node(self, ux, uy, vx, vy):
         # input: a node which is a part of a jammed edge
         # jammed_node: longitude and latitude, similar to G.nodes[u]['x'], G.nodes[u]['y'] in draw_map function
         # the jammed edge is added into self.smooth_edge (coordinates of canvas)
         G = self.map
-
+        u_red, v_red = 0, 0
         for u, v in G.edges(keys=False, data=False):
             if G.nodes[u]['x'] == ux and G.nodes[u]['y'] == uy and G.nodes[v]['x'] == vx and G.nodes[v]['y'] == vy:
                 u_red, v_red = u, v 
@@ -172,11 +178,10 @@ class RoadMap(object):
             if u == u_red and v == v_red:
                 self.jam_edge.remove((u, v))
 
-        for u, v in self.smooth_edge:
-            self.draw_smooth_edge(u, v, handler)
-
+        
     def input_cars(self, car_dic_element):
         # car_dic_element is a dic type element
+        print('\n\nbefore input car  ', self.cars)
         if car_dic_element['category'] != 'car':
             return 
         ID, x, y = car_dic_element['id'], car_dic_element['x'], car_dic_element['y']
@@ -186,6 +191,7 @@ class RoadMap(object):
                 self.cars.remove(c)
                 break
         self.cars.append(newcar)    
+        print('\nafter input car  ', self.cars)
 
     def draw_cars(self, handler):
         # car_element is an element of self.car
@@ -200,34 +206,38 @@ class RoadMap(object):
             #light blue dot represent car
 
     def input_safetyzone(self, sz_element):
-        if sz_element['category'] is not 'safetyzone':
-            return
+        print('\n\nbefore input sftyz: ', self.safetyzone)
+        mapping = self.__mapping__(self.width, self.height)
         ID, color = sz_element['id'], sz_element['color']
         dots = []
-        dots.append(sz_element['dot1'])
-        dots.append(sz_element['dot2'])
-        dots.append(sz_element['dot3'])
-        dots.append(sz_element['dot4'])
+        x, y = mapping(sz_element['dot1'][0], sz_element['dot1'][1])
+        dots.append([x, y])
+        x, y = mapping(sz_element['dot2'][0], sz_element['dot2'][1])
+        dots.append([x, y])
+        x, y = mapping(sz_element['dot3'][0], sz_element['dot3'][1])
+        dots.append([x, y])
+        x, y = mapping(sz_element['dot4'][0], sz_element['dot4'][1])
+        dots.append([x, y])
         sz = {'id': ID, 'dots': dots, 'color': color}
         for s in self.safetyzone:
             if s['id'] == ID:
                 self.safetyzone.remove(s)
                 break
         self.safetyzone.append(sz)
+        print('\nafter input sftyz: ', self.safetyzone)
 
     def draw_safetyzone(self, handler):
-        G = self.map
-        mapping = self.__mapping__(self.width, self.height)
         for sz in self.safetyzone:
             dot = sz['dots']
-            if color == 'red':
-                color = '#E91822'
+            if sz['color'] == 'red':
+                color = '#C70039'
             else:
                 color = '#29A71A'
-            handler.create_line(dot[0][0], dot[0][1], dot[1][0], dot[1][1], width=3, fill=color, dash = 5)
-            handler.create_line(dot[2][0], dot[2][1], dot[1][0], dot[1][1], width=3, fill=color, dash = 5)
-            handler.create_line(dot[0][0], dot[0][1], dot[3][0], dot[3][1], width=3, fill=color, dash = 5)
-            handler.create_line(dot[2][0], dot[2][1], dot[3][0], dot[3][1], width=3, fill=color, dash = 5)
+            print(dot)
+            handler.create_line(dot[0][0], dot[0][1], dot[1][0], dot[1][1], width=8, fill=color, dash = 3)
+            handler.create_line(dot[2][0], dot[2][1], dot[1][0], dot[1][1], width=8, fill=color, dash = 3)
+            handler.create_line(dot[0][0], dot[0][1], dot[3][0], dot[3][1], width=8, fill=color, dash = 3)
+            handler.create_line(dot[2][0], dot[2][1], dot[3][0], dot[3][1], width=8, fill=color, dash = 3)
 
     def __mapping__(self, w, h):
         offset_x, offset_y = self.bbox[0], self.bbox[3]
@@ -280,11 +290,29 @@ def update_window(event, message, road_map, handler):
         message_body = message.get(timeout=1)
         if message_body["category"] == 'car':
             road_map.input_cars(message_body)
-            road_map.draw_cars(handler)
+        elif message_body["category"] == 'safetyzone':
+            print('safetyzone receive')
+            road_map.input_safetyzone(message_body)
+        elif message_body["category"] == 'road':
+            ux, uy = message_body["ux"], message_body["uy"]
+            vx, vy = message_body["vx"], message_body["vy"]
+            if message_body["state"] == 'smooth':
+                road_map.input_smooth_node(ux, uy, vx, vy)
+            else:
+                road_map.input_jammed_node(ux, uy, vx, vy)
         else:
             print('unknown message')
     except queue.Empty:
         print('queue is empty')
+
+    # re-draw the map
+    handler.delete('all')
+    road_map.draw_map(handler)
+    road_map.draw_jammed_edge(handler)
+    road_map.draw_smooth_edge(handler)
+    road_map.draw_cars(handler)
+    road_map.draw_safetyzone(handler)
+
 
 if __name__ == "__main__":
     print(os.getppid())
