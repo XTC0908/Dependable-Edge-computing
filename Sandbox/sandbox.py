@@ -9,6 +9,7 @@ from rdflib.namespace import RDF, RDFS, XSD
 from rdflib import Namespace
 from rdflib import Literal, BNode
 import numpy as np
+import time
 
 oslc  = Namespace('http://open-services.net/ns/core#')
 sh    = Namespace('http://www.w3.org/ns/shacl')
@@ -23,30 +24,48 @@ class Sandbox(object):
         
     def __init_RDF__(self):
         G = rdflib.Graph()
+        G.bind('edge', edge)
+        G.bind('entity', entity)
         return G
 
     def add_vehicle(self, vehicle):
-        latlon2utm = lambda x: utm.from_latlon(x[0], x[1])
         
         G = self.top
         v = BNode()
         G.add((edge.sandbox, entity.vehicle, v))
-        G.add((v, entity.id, Literal(vehicle['id'])))
+        G.add((v, entity.vid, Literal(vehicle['vid'])))
         
-        pos = list(latlon2utm(vehicle['position'])[:2])
+        pos = list(vehicle['position'])
+
         G.add((v, entity.pos, Literal(pos)))
-
         G.add((v, entity.time_stamp, Literal(vehicle['time_stamp'])))
-
-        G.add((v, entity.velocity, Literal(vehicle['velocity'])))
+        G.add((v, entity.velocity, Literal(0)))
+        G.add((v, entity.dest, Literal(None)))
+        G.add((v, entity.plan, Literal(None)))
 
         on = self.on_query(pos)
         G.add((v, entity.on, Literal(on)))
 
-        print(on)
-        print(self.map.nodes[on[0]])
-        print(self.map.nodes[on[1]])
 
+    def update_vehicle(self, vehicle):
+        toUtm = lambda x: np.array(utm.from_latlon(x[0], x[1])[:2])
+        G = self.top
+        t = vehicle['time_stamp']
+        pos = toUtm(vehicle['position'])
+        vid = vehicle['vid']
+
+        v = G.value(object = Literal(vid), predicate=entity.vid)
+        dt = t - (G.value(subject = BNode(v), predicate=entity.time_stamp).value)
+        dpos = pos - toUtm(G.value(subject = BNode(v), predicate=entity.pos).value)
+        try:
+            velocity = (dpos/dt)
+            G.set((BNode(v),entity.velocity, Literal(velocity)))
+        except ZeroDivisionError:
+            pass
+        
+        G.set((BNode(v), entity.time_stamp, Literal(t)))
+        G.set((BNode(v), entity.pos, Literal(vehicle['position'])))
+        G.set((BNode(v), entity.on, Literal(self.on_query(vehicle['position']))))
 
     def load_map(self, map_path, folder):
         G = self.top
@@ -63,38 +82,45 @@ class Sandbox(object):
             
             waypoint = BNode()
             G.add((path, entity.waypoint, waypoint))
-            G.add((waypoint, entity.id, Literal(u)))
-            G.add((waypoint, entity.pos, Literal([map_G.nodes[u]['x'], map_G.nodes[u]['y']])))
+            G.add((waypoint, entity.vid, Literal(u)))
+            G.add((waypoint, entity.pos, Literal([float(map_G.nodes[u]['lat']), float(map_G.nodes[u]['lon'])])))
 
             waypoint = BNode()
             G.add((path, entity.waypoint, waypoint))
-            G.add((waypoint, entity.id, Literal(v)))
-            G.add((waypoint, entity.pos, Literal([map_G.nodes[v]['x'], map_G.nodes[v]['y']])))
+            G.add((waypoint, entity.vid, Literal(v)))
+            G.add((waypoint, entity.pos, Literal([float(map_G.nodes[v]['lat']), float(map_G.nodes[v]['lon'])])))
 
     def on_query(self, pos):
         G = self.top
         pos = np.array(pos)
-        print(pos)
         for path in G.objects(predicate = entity.path):
             wps = list(G.objects(subject=path, predicate=entity.waypoint))
             pos0 = np.array(G.value(subject=wps[0], predicate=entity.pos).value)
             pos1 = np.array(G.value(subject=wps[1], predicate=entity.pos).value)
-            if (pos - pos0).all() < 1e-5 or (pos - pos0).all() < 1e-5:
-                return [G.value(subject=wps[0], predicate=entity.id).value, G.value(subject=wps[1], predicate=entity.id).value]
+            #print(np.abs(pos - pos1), np.abs(pos - pos0))
+            if np.abs(pos - pos0).all() < 1e-6 or np.abs(pos - pos1).all() < 1e-6:
+                return [G.value(subject=wps[0], predicate=entity.vid).value, G.value(subject=wps[1], predicate=entity.vid).value]
             elif np.sum((pos - pos0)**2) > np.sum((pos1 - pos0)**2):
                 pass
             else:
-                k = (pos0[0] - pos0[1]) / (pos1[0] - pos1[1])
-                k2 = (pos[1] - pos0[1]) / (pos[1] - pos1[1])
-                if (k-k2) <= 1e-5:
-                    return [G.value(subject=wps[0], predicate=entity.id).value, G.value(subject=wps[1], predicate=entity.id).value]
-
+                k = (pos1[0] - pos0[0]) / (pos1[1] - pos0[1])
+                k2 = (pos[0] - pos0[0]) / (pos[1] - pos0[1])
+                if (k-k2) <= 1e-5 and (k2-k) <= 1e-5:
+                    return [G.value(subject=wps[0], predicate=entity.vid).value, G.value(subject=wps[1], predicate=entity.vid).value]
         return None
 
 if __name__ == '__main__':
     sandbox = Sandbox()
     sandbox.load_map('demo.graphml', '../Viz/data/')
-    sandbox.add_vehicle({'id':1, 'position':(59.3365935,18.0674845), 'time_stamp': 0.000, 'velocity': 0.0000})
+    sandbox.add_vehicle({'vid':1, 'position':(59.3365935,18.0674845), 'time_stamp': 0.000})
+    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.100})
+    sandbox.update_vehicle({'vid':1, 'position':(59.3365938142,18.0674910088), 'time_stamp': 0.200})
+    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.300})
+    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.400})
+    #sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.500})
+#
+    #sandbox.add_vehicle({'vid':1, 'position':(59.3366635666,18.0689359624), 'time_stamp': 0.000})
+    #sandbox.add_vehicle({'vid':1, 'position':(59.3367506,18.0707389), 'time_stamp': 0.000})
     #sandbox.on_query((0, 0))
     
     #print(sandbox.top.serialize(format='turtle').decode('utf-8'))
