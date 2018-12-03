@@ -287,9 +287,11 @@ def close_window(event, server):
 def update_window(event, message, road_map, handler):
     try:
         message_body = message.get(timeout=1)
+        print(message_body)
         if message_body["category"] == 'car':
             road_map.input_cars(message_body)
         elif message_body["category"] == 'safetyzone':
+            print('catch')
             road_map.input_safetyzone(message_body)
         elif message_body["category"] == 'road':
             ux, uy = message_body["ux"], message_body["uy"]

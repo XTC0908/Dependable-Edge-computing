@@ -12,6 +12,7 @@ import numpy as np
 import time
 from calc_riskzone import risk_zone, overlapping
 from interfaceToViz import InterfaceViz
+import time
 
 oslc  = Namespace('http://open-services.net/ns/core#')
 sh    = Namespace('http://www.w3.org/ns/shacl')
@@ -77,7 +78,8 @@ class Sandbox(object):
         G.set((BNode(v), entity.pos, Literal(vehicle['position'])))
         G.set((BNode(v), entity.on, Literal(self.on_query(vehicle['position']))))
         
-        self.viz.car_req({'id':vehicle['vid'], 'x': pos[0], 'y': pos[1]})
+        #self.viz.car_req({'id':vehicle['vid'], 'x': pos[0], 'y': pos[1]})
+        #time.sleep(0.5)
         self.viz.risk_zone_req({'id':vehicle['vid'], 'x': pos[0], 'y': pos[1], \
                                 'dot1':tuple(risk[0]), 'dot2':tuple(risk[1]), \
                                 'dot3':tuple(risk[2]), 'dot4':tuple(risk[3])})
@@ -128,10 +130,12 @@ if __name__ == '__main__':
     sandbox = Sandbox()
     sandbox.load_map('demo.graphml', '../Viz/data/')
     sandbox.add_vehicle({'vid':1, 'position':(59.3365935,18.0674845), 'time_stamp': 0.000})
-    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.001})
-    sandbox.update_vehicle({'vid':1, 'position':(59.3365938142,18.0674910088), 'time_stamp': 0.002})
-    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.003})
-    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.004})
+    time.sleep(2)
+    sandbox.update_vehicle({'vid':1, 'position':(59.3366178505,18.067988932), 'time_stamp':1.00})
+    time.sleep(2)
+    sandbox.update_vehicle({'vid':1, 'position':(59.33665634,18.06878626), 'time_stamp': 2.00})
+    #sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.003})
+    #sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.004})
     #sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.500})
 #
     #sandbox.add_vehicle({'vid':1, 'position':(59.3366635666,18.0689359624), 'time_stamp': 0.000})
