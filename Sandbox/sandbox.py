@@ -10,6 +10,8 @@ from rdflib import Namespace
 from rdflib import Literal, BNode
 import numpy as np
 import time
+from calc_riskzone import risk_zone, overlapping
+from interfaceToViz import InterfaceViz
 
 oslc  = Namespace('http://open-services.net/ns/core#')
 sh    = Namespace('http://www.w3.org/ns/shacl')
@@ -18,9 +20,12 @@ entity  = Namespace('http://dependable-edge-entity.gru/entity#')
 pddl  = Namespace('http://ontology.cf.ericsson.net/pddl/')
 pddle = Namespace('http://ontology.cf.ericsson.net/pddl_example/')
 
+toUtm = lambda x: np.array(utm.from_latlon(x[0], x[1])[:2])
+
 class Sandbox(object):
     def __init__(self):
         self.top = self.__init_RDF__()
+        self.viz = InterfaceViz('http://localhost:8888')
         
     def __init_RDF__(self):
         G = rdflib.Graph()
@@ -42,13 +47,16 @@ class Sandbox(object):
         G.add((v, entity.velocity, Literal(0)))
         G.add((v, entity.dest, Literal(None)))
         G.add((v, entity.plan, Literal(None)))
+        G.add((v, entity.risk, Literal(None)))
 
         on = self.on_query(pos)
         G.add((v, entity.on, Literal(on)))
+        
+        utm_pos = toUtm(vehicle['position'])
+        self.viz.car_req({'id':vehicle['vid'], 'x': utm_pos[0], 'y': utm_pos[1]})
 
 
     def update_vehicle(self, vehicle):
-        toUtm = lambda x: np.array(utm.from_latlon(x[0], x[1])[:2])
         G = self.top
         t = vehicle['time_stamp']
         pos = toUtm(vehicle['position'])
@@ -63,9 +71,16 @@ class Sandbox(object):
         except ZeroDivisionError:
             pass
         
+        risk = risk_zone(velocity, pos)
+        G.set((BNode(v), entity.risk, Literal(risk)))
         G.set((BNode(v), entity.time_stamp, Literal(t)))
         G.set((BNode(v), entity.pos, Literal(vehicle['position'])))
         G.set((BNode(v), entity.on, Literal(self.on_query(vehicle['position']))))
+        
+        self.viz.car_req({'id':vehicle['vid'], 'x': pos[0], 'y': pos[1]})
+        self.viz.risk_zone_req({'id':vehicle['vid'], 'x': pos[0], 'y': pos[1], \
+                                'dot1':tuple(risk[0]), 'dot2':tuple(risk[1]), \
+                                'dot3':tuple(risk[2]), 'dot4':tuple(risk[3])})
 
     def load_map(self, map_path, folder):
         G = self.top
@@ -113,10 +128,10 @@ if __name__ == '__main__':
     sandbox = Sandbox()
     sandbox.load_map('demo.graphml', '../Viz/data/')
     sandbox.add_vehicle({'vid':1, 'position':(59.3365935,18.0674845), 'time_stamp': 0.000})
-    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.100})
-    sandbox.update_vehicle({'vid':1, 'position':(59.3365938142,18.0674910088), 'time_stamp': 0.200})
-    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.300})
-    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.400})
+    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.001})
+    sandbox.update_vehicle({'vid':1, 'position':(59.3365938142,18.0674910088), 'time_stamp': 0.002})
+    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.003})
+    sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.004})
     #sandbox.update_vehicle({'vid':1, 'position':(59.3365936571,18.0674877544), 'time_stamp': 0.500})
 #
     #sandbox.add_vehicle({'vid':1, 'position':(59.3366635666,18.0689359624), 'time_stamp': 0.000})
