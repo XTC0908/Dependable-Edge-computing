@@ -52,7 +52,7 @@ def cal_size(V_vec, mu=0.8, width=2):
     return (width, hight)
 
 def risk_zone(V_vec, loc):
-    size = cal_size(V_vec)
+    size = cal_size(V_vec, width=5)
     return bbox(V_vec, size, np.array(loc))
 
 if __name__=='__main__':
