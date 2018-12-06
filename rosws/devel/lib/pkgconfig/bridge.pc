@@ -1,0 +1,8 @@
+prefix=/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel
+
+Name: bridge
+Description: Description of bridge
+Version: 0.9.0
+Cflags: 
+Libs: -L/home/yulans/Documents/edge/cnedge/Dependable-Edge-computing/rosws/devel/lib 
+Requires: 

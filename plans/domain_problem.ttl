@@ -228,7 +228,7 @@ pddl:goal [ a pddl:And ;
    a :waypoint ;
    oslc:instanceShape pddl:ObjectShape ;
    rdfs:label "b" .
-    :c
+   :c
    a :waypoint ;
    oslc:instanceShape pddl:ObjectShape ;
    rdfs:label "c" .
@@ -239,4 +239,4 @@ pddl:goal [ a pddl:And ;
    rdfs:label "d" .							
 								
 				
-			sssss
+	

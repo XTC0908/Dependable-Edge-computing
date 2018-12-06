@@ -108,48 +108,50 @@ rdfs:label "total-moved" .
                      pddl:argument [ a :vehicle_at ;
                                       :vehicle_at-v :move-v ;
                                       :vehicle_at-x :move-x 
-                                         ] ,
-                               [a :visible ;
-                                        :visible-x :move-x;
-                                        :visible-y :move-y
+                        
+                                    ] ,
+                                    [a :visible ;
+                                      :visible-x :move-x;
+                                      :visible-y :move-y
                                     ]
                     ];
+
  pddl:effect [ a pddl:And ;
-    			 pddl:argument [ a :vehicle_at ;
-                				:vehicle_at-v :move-v ;
-                    			:vehicle_at-x :move-y ;
-                        ] ,
-    		 [ a pddl:Not ;
-    					 pddl:argument [ a :vehicle_at ;
-                    						:vehicle_at-v :move-v ;
-                        					 :vehicle_at-x :move-x
-                            ]
-         ] ,
-         [a pddl:Increase ;
-        	pddl:parameter [ a :moved ;
-        					:moved-m :move-v
-        					];
-        					pddl:argument 1
-        					],
-        					[ a pddl:Increase ;
-        						pddl:parameter [a :total-moved ] ;
-        						pddl:argument 1
-        						],
-      [ a pddl:When ;
-        		 pddl:argument [
-                          a pddl:Equality ;
-                              pddl:left :move-y ;
-                               pddl:right :dest
-                      ];
+    			      pddl:argument [ a :vehicle_at ;
+                        				:vehicle_at-v :move-v ;
+                    		      	:vehicle_at-x :move-y ;
+                              ] ,
+    		                      [ a pddl:Not ;
+    					                  pddl:argument [ a :vehicle_at ;
+                    						                :vehicle_at-v :move-v ;
+                        					              :vehicle_at-x :move-x
+                                              ]
+                              ] ,
+                              [ a pddl:Increase ;
+                              	pddl:parameter [ a :moved ;
+                              					          :moved-m :move-v
+                              					        ] ;
+                              					        pddl:argument 1
+                              ] ,
+                              [ a pddl:Increase ;
+                              	pddl:parameter [a :total-moved ] ;
+                              	pddl:argument 1
+                              ] ,
+                              [ a pddl:When ;
+                                		 pddl:argument [
+                                                  a pddl:Equality ;
+                                                      pddl:left :move-y ;
+                                                       pddl:right :dest
+                                              ] ;
     
-        pddl:argument [ a pddl:Not ;
-            			pddl:argument [ a :visible ;
-                    		:visible-x :move-x;
-                			:visible-y :move-y
-                     ]
-                          ]
-                  ]
-                  ].
+                                pddl:argument [ a pddl:Not ;
+                                    			pddl:argument [ a :visible ;
+                                            		:visible-x :move-x;
+                                        			:visible-y :move-y
+                                             ]
+                                                  ]
+                                          ]
+              ].
 
 :move-v 
   a pddl:Parameter ;
