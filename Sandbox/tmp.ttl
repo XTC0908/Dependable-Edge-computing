@@ -1,0 +1,363 @@
+@prefix    sh: <http://www.w3.org/ns/shacl#> .
+@prefix   xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix   rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix  oslc: <http://open-services.net/ns/core#> .
+@prefix pddle: <http://ontology.cf.ericsson.net/pddl_example/> .
+@prefix  pddl: <http://ontology.cf.ericsson.net/pddl/> .
+
+<plan>
+        a pddl:Plan ;
+        pddl:cost 3.9E1 ;
+        pddl:step [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_start ;
+                                  pddle:move-y pddle:way_point_372856832
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 1
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_372856832 ;
+                                  pddle:move-y pddle:way_point_169807
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 2
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_169807 ;
+                                  pddle:move-y pddle:way_point_6034498385
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 3
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_6034498385 ;
+                                  pddle:move-y pddle:way_point_410520927
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 4
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_410520927 ;
+                                  pddle:move-y pddle:way_point_2357514
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 5
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_2357514 ;
+                                  pddle:move-y pddle:way_point_1362749777
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 6
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1362749777 ;
+                                  pddle:move-y pddle:way_point_21665424
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 7
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_21665424 ;
+                                  pddle:move-y pddle:way_point_1469802393
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 8
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1469802393 ;
+                                  pddle:move-y pddle:way_point_21665428
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 9
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_21665428 ;
+                                  pddle:move-y pddle:way_point_410522788
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 10
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_410522788 ;
+                                  pddle:move-y pddle:way_point_2504326960
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 11
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_2504326960 ;
+                                  pddle:move-y pddle:way_point_2357517
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 12
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_2357517 ;
+                                  pddle:move-y pddle:way_point_1734187043
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 13
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1734187043 ;
+                                  pddle:move-y pddle:way_point_1734187041
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 14
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1734187041 ;
+                                  pddle:move-y pddle:way_point_1734187038
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 15
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1734187038 ;
+                                  pddle:move-y pddle:way_point_5533753306
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 16
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_5533753306 ;
+                                  pddle:move-y pddle:way_point_1734187037
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 17
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1734187037 ;
+                                  pddle:move-y pddle:way_point_1734187036
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 18
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1734187036 ;
+                                  pddle:move-y pddle:way_point_172605
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 19
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_172605 ;
+                                  pddle:move-y pddle:way_point_1393926005
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 20
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1393926005 ;
+                                  pddle:move-y pddle:way_point_5533753305
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 21
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_5533753305 ;
+                                  pddle:move-y pddle:way_point_1734187034
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 22
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1734187034 ;
+                                  pddle:move-y pddle:way_point_32911183
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 23
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_32911183 ;
+                                  pddle:move-y pddle:way_point_5418184410
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 24
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_5418184410 ;
+                                  pddle:move-y pddle:way_point_410541913
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 25
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_410541913 ;
+                                  pddle:move-y pddle:way_point_5418184409
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 26
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_5418184409 ;
+                                  pddle:move-y pddle:way_point_410544010
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 27
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_410544010 ;
+                                  pddle:move-y pddle:way_point_1386747199
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 28
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1386747199 ;
+                                  pddle:move-y pddle:way_point_5245362
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 29
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_5245362 ;
+                                  pddle:move-y pddle:way_point_1362013640
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 30
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1362013640 ;
+                                  pddle:move-y pddle:way_point_1734187028
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 31
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1734187028 ;
+                                  pddle:move-y pddle:way_point_1362013639
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 32
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1362013639 ;
+                                  pddle:move-y pddle:way_point_5245363
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 33
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_5245363 ;
+                                  pddle:move-y pddle:way_point_1362013646
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 34
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1362013646 ;
+                                  pddle:move-y pddle:way_point_180190985
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 35
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_180190985 ;
+                                  pddle:move-y pddle:way_point_1382112816
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 36
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1382112816 ;
+                                  pddle:move-y pddle:way_point_1343566608
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 37
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_1343566608 ;
+                                  pddle:move-y pddle:way_point_21718762
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 38
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_21718762 ;
+                                  pddle:move-y pddle:dest
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 39
+                  ] ;
+        pddl:time 0.7E-1 ;
+        oslc:instanceShape pddl:PlanShape .

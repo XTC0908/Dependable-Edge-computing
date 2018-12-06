@@ -48,6 +48,7 @@ class InterfaceViz(object):
         body['dot2'] = data['dot2']
         body['dot3'] = data['dot3']
         body['dot4'] = data['dot4']
+        body["color"] = data['color']
         r = requests.post(self.url, data=json.dumps(body))
         return r
 
