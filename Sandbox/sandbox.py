@@ -227,7 +227,7 @@ if __name__ == '__main__':
     sandbox = Sandbox()
     sandbox.load_map('demo.graphml', '../Viz/data/')
     handler = ConstructHandler(sandbox)
-    start_server(('127.0.0.1', 9000), handler)
+    start_server(('', 9000), handler)
     #sandbox.load_map('demo.graphml', '../Viz/data/')
     #sandbox.add_vehicle({'vid':1, 'position':(59.3365935,18.0674845), 'dest':(59.3428782,18.078231), 'time_stamp': 0.000})
         
