@@ -9,6 +9,7 @@ import websocket
 import argparse
 import threading
 import sys
+import queue
 #args = parser.parse_args()
 
 print("BSON-ROSBridge Testclient")
@@ -22,7 +23,7 @@ WEBSOCKET_URL = "ws://"+TCP_IP+":"+str(TCP_PORT)
 TEST_MODE = "JSON"
 COMMUNICATION_METHOD = "TCP"
 
-def monitorGeopoint():
+def monitorGeopoint(msg_queue):
   geo_msg_info = {
     "op": "subscribe",
     "topic": "/geopoint",
@@ -41,7 +42,10 @@ def monitorGeopoint():
     if type_msg == 'publish':
       msgs_conf = json.loads(rcv_json)
       dictionary = json.loads(rcv_json)#['msg']['geo']['latitude']
-      print(dictionary)
+      try:
+        msg_queue.put(dictionary)
+      except:
+        print('queue is full')
 
 def monitorObs():
   obs_msg_info = {
@@ -65,12 +69,12 @@ def monitorObs():
       dictionary = json.loads(obs_json)['msg']['geo']['latitude']
       print(dictionary)
 
-monitorGeopoint()
+#monitorGeopoint()
 
-T1 = threading.Thread(target = monitorGeopoint,args = ())
-T2 = threading.Thread(target = monitorObs,args = ())
-T1.start()
-T2.start()
+#T1 = threading.Thread(target = monitorGeopoint,args = ())
+#T2 = threading.Thread(target = monitorObs,args = ())
+#T1.start()
+#T2.start()
 
 
 

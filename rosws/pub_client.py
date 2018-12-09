@@ -33,40 +33,31 @@ def setDest(vhcid,lat,lon,alt):
   }
   return dest_message
 
-def pubcmd():
-  try:
-    ws = websocket.create_connection(WEBSOCKET_URL)
-    print("The connection to "+ WEBSOCKET_URL +" is successful!")
-  except:
-    print("The connection to "+ WEBSOCKET_URL +" fails!")
+def pubcmd(target, ws):
 
-
-  while(1):
+  #while(1):
     #vhc = input("Which vehicle? ")
     #cmd = input("Input 1 to start, input 0 to stop:")
 
-    vhc,cmd,lat,lon,alt= input("[vhcid cmd lat lon alt]]\n").split()
-    my_cmd = cmdFunction(int(vhc),int(cmd))
-    path_cmd = setDest(int(vhc),float(lat),float(lon),float(alt))
+  vhc,cmd,lat,lon,alt = target #input("[vhcid cmd lat lon alt]]\n").split()
+  my_cmd = cmdFunction(int(vhc),int(cmd))
+  path_cmd = setDest(int(vhc),float(lat),float(lon),float(alt))
+  cmd_msg_info = {
+    "op": "publish",
+    "topic": "/vhc_status_m",
+    "type": "edge_info/vhc_cmd",
+    "msg" : my_cmd
+  }
+  
+  path_msg_info = {
+    "op": "publish",
+    "topic": "/vhc_path_msg",
+    "type": "edge_info/vhc_geo",
+    "msg" : path_cmd
+  }
+  cmd_info_json = json.dumps(cmd_msg_info)
+  ws.send(cmd_info_json)
+  path_info_json = json.dumps(path_msg_info)
+  ws.send(path_info_json)
 
-    cmd_msg_info = {
-      "op": "publish",
-      "topic": "/vhc_status_m",
-      "type": "edge_info/vhc_cmd",
-      "msg" : my_cmd
-    }
-    
-    path_msg_info = {
-      "op": "publish",
-      "topic": "/vhc_path_msg",
-      "type": "edge_info/vhc_geo",
-      "msg" : path_cmd
-    }
-
-    cmd_info_json = json.dumps(cmd_msg_info)
-    ws.send(cmd_info_json)
-
-    path_info_json = json.dumps(path_msg_info)
-    ws.send(path_info_json)
-
-pubcmd()
+#pubcmd()
