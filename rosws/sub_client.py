@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import bson
+#import bson
 import json
 import time
 import socket
@@ -13,7 +13,7 @@ import sys
 
 print("BSON-ROSBridge Testclient")
 
-TCP_IP = '127.0.0.1'
+TCP_IP = '130.229.153.146'
 TCP_PORT = 9090
 BUFFER_SIZE = 4096
 
@@ -40,7 +40,7 @@ def monitorGeopoint():
     type_msg = json.loads(rcv_json)['op']
     if type_msg == 'publish':
       msgs_conf = json.loads(rcv_json)
-      dictionary = json.loads(rcv_json)['msg']['geo']['latitude']
+      dictionary = json.loads(rcv_json)#['msg']['geo']['latitude']
       print(dictionary)
 
 def monitorObs():
