@@ -7,7 +7,7 @@
 
 <plan>
         a pddl:Plan ;
-        pddl:cost 3.8E1 ;
+        pddl:cost 3.9E1 ;
         pddl:step [ a pddl:Step ;
                     pddl:action [ a pddle:move ;
                                   pddle:move-b pddle:v ;
@@ -345,10 +345,19 @@
                     pddl:action [ a pddle:move ;
                                   pddle:move-b pddle:v ;
                                   pddle:move-x pddle:way_point_169807 ;
-                                  pddle:move-y pddle:dest
+                                  pddle:move-y pddle:way_point_372856832
                                 ] ;
                     oslc:instanceShape pddl:StepShape ;
                     sh:order 38
+                  ] ,
+                  [ a pddl:Step ;
+                    pddl:action [ a pddle:move ;
+                                  pddle:move-b pddle:v ;
+                                  pddle:move-x pddle:way_point_372856832 ;
+                                  pddle:move-y pddle:dest
+                                ] ;
+                    oslc:instanceShape pddl:StepShape ;
+                    sh:order 39
                   ] ;
         pddl:time 0.7E-1 ;
         oslc:instanceShape pddl:PlanShape .
