@@ -12,7 +12,7 @@ sys.path.append("../rosws/")
 from sub_client import monitorGeopoint
 from pub_client import pubcmd
 
-TCP_IP = '130.229.153.146'
+TCP_IP = '192.168.0.1'#130.229.153.146'
 TCP_PORT = 9090
 BUFFER_SIZE = 4096
 
