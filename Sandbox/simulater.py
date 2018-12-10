@@ -12,7 +12,7 @@ sys.path.append("../rosws/")
 from sub_client import monitorGeopoint
 from pub_client import pubcmd
 
-TCP_IP = '130.229.153.146'
+TCP_IP = '192.168.0.1'#'130.229.138.19'
 TCP_PORT = 9090
 BUFFER_SIZE = 4096
 
@@ -20,14 +20,24 @@ WEBSOCKET_URL = "ws://"+TCP_IP+":"+str(TCP_PORT)
 #toUtm = lambda x: np.array(utm.from_latlon(x[0], x[1])[:2])
 
 class Vehicle(object):
-    def __init__(self, sandbox_url, init):
+    def __init__(self, sandbox_url, init, real_position=False):
         self.sandbox = sandbox_url
         self.info = init
-        self.start_p = init['position']
-        self.end_p = init['dest']
-        self.count_len = 0
         self.queue = queue.Queue()
-
+        self.rcv_msg = threading.Thread(target = monitorGeopoint,args = (self.queue, ))
+        self.rcv_msg.start()
+        if real_position:
+            msg = self.queue.get()#init['position']
+            self.start_p = [msg['msg']['geo']['latitude'], msg['msg']['geo']['longitude']]
+            self.end_p = init['dest'] if init['dest'] != self.start_p else init['position']
+            self.info['position'] = self.start_p
+            self.info['dest'] = self.end_p
+            print('init done start:', self.start_p, 'end: ', self.end_p)
+        else:
+            self.start_p = init['position']
+            self.end_p = init['dest']
+    
+        self.count_len = 0
         r = requests.post(self.sandbox, data=json.dumps(init))
         
         self.action = list(json.loads(r.text))
@@ -36,9 +46,9 @@ class Vehicle(object):
         self.action[-1][-2] = self.action[-2][-1]
         self.action[-1][-1] = init['dest']
 
+
         #sub_client = lambda x: monitorGeopoint(x)
-        self.rcv_msg = threading.Thread(target = monitorGeopoint,args = (self.queue, ))
-        self.rcv_msg.start()
+        
 
         try:
           self.ws = websocket.create_connection(WEBSOCKET_URL)
@@ -134,17 +144,25 @@ if __name__=='__main__':
     vid = sys.argv[2]
     direction = sys.argv[3]
     jam = sys.argv[4]
-    if direction == "i":
-        v1 = Vehicle('http://localhost:9000', \
-                    {"type":"new", "vid": vid, "dest": [59.3365935,18.0674845], \
-                     "position": [59.3428782,18.078231], "time_stamp": 0.000})
-    else:
-        v1 = Vehicle('http://localhost:9000', \
-            {"type":"new", "vid": 1, "position": [59.3365935,18.0674845], \
-             "dest": [59.3428782,18.078231], "time_stamp": 0.000})
 
     if local == 'local':
+        if direction == "i":
+            v1 = Vehicle('http://localhost:9000', \
+                        {"type":"new", "vid": vid, "dest": [59.3365935,18.0674845], \
+                         "position": [59.3428782,18.078231], "time_stamp": 0.000})
+        else:
+            v1 = Vehicle('http://localhost:9000', \
+                {"type":"new", "vid": 1, "position": [59.3365935,18.0674845], \
+                 "dest": [59.3428782,18.078231], "time_stamp": 0.000})
         v1.run(jam)
     elif local == 'remote':
+        if direction == "i":
+            v1 = Vehicle('http://localhost:9000', \
+                        {"type":"new", "vid": vid, "dest": [59.3365935,18.0674845], \
+                         "position": [59.3428782,18.078231], "time_stamp": 0.000}, real_position=True)
+        else:
+            v1 = Vehicle('http://localhost:9000', \
+                {"type":"new", "vid": 1, "position": [59.3365935,18.0674845], \
+                 "dest": [59.3428782,18.078231], "time_stamp": 0.000}, real_position=True)
         v1.run_remote(jam)
-
+        
