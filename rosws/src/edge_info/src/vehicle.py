@@ -52,9 +52,7 @@ class vehicle:
                 self.vhc_status = 1
             if data.cmd == 0:
                 self.vhc_status = 0
-        
 
-  
 
     def obs_callback(self,data):
         if data.vhcid != self.GeoP_msg.vhcid and dist(self.GeoP_msg,data) < 0.0001:
@@ -95,7 +93,6 @@ class vehicle:
         vhc_p.geo.longitude = lon
         vhc_p.geo.altitude = alt
         self.GeoP_msg = vhc_p
-        #return vhc_p
 
     def edge_talker(self):
         GeoP_pub = rospy.Publisher('geopoint', vhc_geo, queue_size=10)
@@ -105,9 +102,6 @@ class vehicle:
         rospy.Subscriber("vhc_path_msg", vhc_geo, self.vhc_path_callback)
         rospy.init_node('edge_talker', anonymous=True)
         rate = rospy.Rate(10) # 10hz
-        #GeoP_msg = vhc_geo()
-        #self.GeoP_msg = self.GeoP_setstart(59.3365935,18.0674845,0.0)
-        #end = GeoP_setstart(59.3367506,18.0707389,0.0)
         self.end =  self.GeoP_msg
         i=0
         while not rospy.is_shutdown():
