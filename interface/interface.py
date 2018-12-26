@@ -20,10 +20,9 @@ class InterfacePlanner(object):
 
 
     def generate_plan(self, url, ttl):
-        with open(ttl, 'r') as f:
-            data = f.read()
-            r = requests.post((url + self.generate_plan_url), data=data, headers = self.generate_pddl_header)
-            return r
+        data = ttl
+        r = requests.post((url + self.generate_plan_url), data=data, headers = self.generate_pddl_header)
+        return r
 
     def generate_validated_plan(self, url, ttl):
         with open(ttl, 'r') as f:

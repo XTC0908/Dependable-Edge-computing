@@ -11,57 +11,13 @@ sh    = Namespace('http://www.w3.org/ns/shacl')
 pddl  = Namespace('http://ontology.cf.ericsson.net/pddl/')
 pddle = Namespace('http://ontology.cf.ericsson.net/pddl_example/')
 
-domain = Graph()
-domain.bind(prefix = 'oslc', namespace = oslc)
-domain.bind(prefix = 'sh', namespace = sh)
-domain.bind(prefix = 'pddl', namespace = pddl)
-domain.bind(prefix = 'pddle', namespace = pddle)
-
-problem = Graph()
-
-
-problem.parse('problem.ttl', format='turtle')
-problem.parse('domain.ttl', format='turtle')
-
-#for s, p, o in problem.triples((pddle.b, None, None)):
-#    print(s, p, o)
-pddle_problem = rdflib.term.URIRef('http://ontology.cf.ericsson.net/pddl_example/edge-computing-problem')
-pddle_visible_x = rdflib.term.URIRef('http://ontology.cf.ericsson.net/pddl_example/visible-x')
-pddle_visible_y = rdflib.term.URIRef('http://ontology.cf.ericsson.net/pddl_example/visible-y')
-
-foo = BNode()
-problem.add((pddle_problem, pddl.init, foo))
-problem.add((foo, RDF.type, pddle.visible))
-problem.add((foo, pddle_visible_x, pddle.f))
-problem.add((foo, pddle_visible_y, pddle.e))
-
-
-problem.add((pddle_problem, pddl.object, pddle.f))
-
-problem.add((pddle.f, RDF.type, pddle.waypoint))
-problem.add((pddle.f, oslc.instanceShape, pddl.ObjectShape))
-problem.add((pddle.f, RDFS.label, Literal('f')))
-with open('test_out.ttl', 'w') as out_file:
-    text = domain.serialize(format='turtle').decode('utf-8')
-    out_file.write(text)
-    text = problem.serialize(format='turtle').decode('utf-8')
-    out_file.write(text)
-
-full_map = nx.load_graphml('./demo.graphml')
-
 def problem_generator(full_map, start_points, end_points, template): 
     '''
     Start point: a tuple (u, v) of edge (road) where the vehicle is on
     End point: a tuple (u, v) of edge (road) where the vehicle finally stop
     Template: a template of rdf/turtle file
     '''
-    
     problem = Graph()
-
-    problem.bind(prefix = 'oslc', namespace = Namespace('http://open-services.net/ns/core#'))
-    problem.bind(prefix = 'sh', namespace = sh)
-    problem.bind(prefix = 'pddl', namespace = pddl)
-    problem.bind(prefix = 'pddle', namespace = Namespace('http://ontology.cf.ericsson.net/pddl_example/'))
 
     problem.parse(template, format='turtle')
     
@@ -76,12 +32,6 @@ def problem_generator(full_map, start_points, end_points, template):
         problem.add((foo, RDF.type, pddle.visible))
         problem.add((foo, pddle['visible-x'], pddle['way_point_'+str(u)]))
         problem.add((foo, pddle['visible-y'], pddle['way_point_'+str(v)]))
-
-        #foo = BNode()
-        #problem.add((pddle['edge-computing-problem'], pddl.init, foo))
-        #problem.add((foo, RDF.type, pddle.visible))
-        #problem.add((foo, pddle['visible-x'], pddle['way_point_'+str(v)]))
-        #problem.add((foo, pddle['visible-y'], pddle['way_point_'+str(u)]))
 
         problem.add((pddle['way_point_'+str(u)], RDF.type, pddle.waypoint))
         problem.add((pddle['way_point_'+str(u)], oslc.instanceShape, pddl.ObjectShape))
@@ -147,17 +97,17 @@ def problem_generator(full_map, start_points, end_points, template):
     
     return problem
 
-    
-    
-    
-    #print(list(full_map.edges(keys=False, data=False)))
+def Generator(m, s, e):
+    domain = Graph()
+    domain.parse('../rdf_generator/domain.ttl', format='turtle')
+
+    problem = problem_generator(m, s, e,'../rdf_generator/problem _template.ttl')
+    return domain + problem
 
 if __name__ == '__main__':
     full_map = nx.load_graphml('./demo.graphml')
     problem = problem_generator(full_map, (169822, 1755176087), (1393926005, 172605),'problem _template.ttl')
 
-    domain = Graph()
-    domain.parse('domain.ttl', format='turtle')
 
     with open('test_out.ttl', 'w') as wfile:
         wfile.write(domain.serialize(format="turtle").decode('utf-8'))

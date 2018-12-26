@@ -103,7 +103,7 @@ Modify src/<package name>/Cmakelist.txt: Add the name of newly created message i
 
 catkin_make clean $ catkin_make
 
-#### Receive messages from client
+Modify client files: See pub_client.py, sub_client.py, edgeweb.html
 
 
 ### Create connection

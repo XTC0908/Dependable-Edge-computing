@@ -146,16 +146,19 @@ class RoadMap(object):
             
 
 
-    def input_jammed_node(self, ux, uy, vx, vy):
+    def input_jammed_node(self, ux, uy, vx, vy, color=None):
         # input: a node which is a part of a jammed edge
         # jammed_node: longitude and latitude, similar to G.nodes[u]['x'], G.nodes[u]['y'] in draw_map function
         # the jammed edge is added into self.smooth_edge (coordinates of canvas)
-        G = self.map
-        u_red, v_red = 0, 0
-        for u, v in G.edges(keys=False, data=False):
-            if G.nodes[u]['x'] == ux and G.nodes[u]['y'] == uy and G.nodes[v]['x'] == vx and G.nodes[v]['y'] == vy:
-                u_red, v_red = u, v 
-                break  
+    
+        #G = self.map
+        print('####')
+        u_red, v_red = ux, vx
+        #print (ux, uy, vx, vy)
+        #for u, v in G.edges(keys=False, data=False):
+        #    if G.nodes[u]['lat'] == ux and G.nodes[u]['lon'] == uy and G.nodes[v]['lat'] == vx and G.nodes[v]['lon'] == vy:
+        #        u_red, v_red = u, v 
+        #        break  
         self.jam_edge.append((u_red, v_red))
         for u, v in self.smooth_edge:
             if u == u_red and v == v_red:
@@ -298,8 +301,12 @@ def update_window(event, message, road_map, handler):
             vx, vy = message_body["vx"], message_body["vy"]
             if message_body["state"] == 'smooth':
                 road_map.input_smooth_node(ux, uy, vx, vy)
-            else:
+            elif message_body["state"] == 'jam':
+                print(message_body)
                 road_map.input_jammed_node(ux, uy, vx, vy)
+            else:
+                road_map.input_jammed_node(ux, uy, vx, vy, color='#00FFFF')
+                    
         else:
             print('unknown message')
     except queue.Empty:
