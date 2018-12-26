@@ -3,9 +3,9 @@ The ros workspace simulates the edge behaviours.
 
 ## Environment
 
-### Add path to bashrc
+### Install ROS kinectic
 
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/Dependable-Edge-computing/rosws
+http://wiki.ros.org/kinetic/Installation/Ubuntu
 
 ### Install catkin workspace
 
@@ -14,6 +14,18 @@ http://wiki.ros.org/catkin
 ### Install rosbridge
 
 http://wiki.ros.org/rosbridge_suite/Tutorials/RunningRosbridge
+
+sudo apt-get install ros-kinetic-rosbridge-suite
+
+source /opt/ros/kinetic/setup.bash
+
+### install geographic messages
+
+
+### Add path to bashrc
+
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/Dependable-Edge-computing/rosws
+
 
 ## Make workspace
 
@@ -60,6 +72,7 @@ open edgeweb.html in brouser
 To watch concole, press F12
 
 ##### Python client
+
 Install required python package
 
 python pub_client.py
@@ -74,13 +87,30 @@ lat lon alt: latitude, longitude, altitude. If command is 0 or 1, just input thr
 
 python sub_client.py
 
-
 ## How to develop
 
-### Package messages
+### message type
+
+Message type suggested: geographic_msgs/GeoPoint, geographic_msgs/RoutePath, geographic_msgs/RouteSegment, geographic_msgs/WayPoint
+
+Message type used: See notes at the beginning of src/edge_info/vehicle.py
+
+### Pack messages
+
+Define messages in src/<package name>/msg/ 
+
+Modify src/<package name>/Cmakelist.txt: Add the name of newly created message in 'add_message_files()' around line 53.
+
+catkin_make clean $ catkin_make
+
+#### Receive messages from client
+
 
 ### Create connection
 
+Local connection : in pub_client.py, sub_client.py, TCP_IP = '127.0.0.1'. In edgeweb.html,  url : 'ws://localhost:9090'.
+
+Connect from another computer: Check local IP address using 'ifconfig' command. Change TCP_IP/url to local IP address.
 
 
 
