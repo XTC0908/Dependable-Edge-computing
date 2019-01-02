@@ -41,27 +41,16 @@ roscore
 
 #### Terminal 2
 
-source devel/setup.sh
-
-rosrun edge_info vhc1.py
-
-#### Terminal 3
-
-source devel/setup.sh
-
-rosrun edge_info vhc2.py
-
-
-#### Terminal 4
-
-source devel/setup.sh
-
-rosrun edge_info ghost_vhc.py
-
-
-#### Terminal 5
-
 roslaunch bridge rosbridge_websocket.launch
+
+
+#### Terminal 3 (A new terminal)
+
+source devel/setup.sh
+
+rosrun edge_info \<file name\>.py
+
+
 
 #### Client 
 
@@ -97,9 +86,9 @@ Message type used: See notes at the beginning of src/edge_info/vehicle.py
 
 ### Pack messages
 
-Define messages in src/<package name>/msg/ 
+Define messages in src/\<package name\>/msg/ 
 
-Modify src/<package name>/Cmakelist.txt: Add the name of newly created message in 'add_message_files()' around line 53.
+Modify src/\<package name\>/Cmakelist.txt: Add the name of newly created message in 'add_message_files()' around line 53.
 
 catkin_make clean $ catkin_make
 
